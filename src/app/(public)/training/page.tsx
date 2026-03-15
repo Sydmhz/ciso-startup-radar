@@ -14,125 +14,27 @@ import {
 } from "@/components/ui/select";
 import { Search, ExternalLink, Clock, DollarSign } from "lucide-react";
 import type { TrainingProgram } from "@/lib/types";
+import allPrograms from "@/lib/data/training.json";
 
-const mockPrograms: TrainingProgram[] = [
-  {
-    id: "t1",
-    name: "CISO Executive Leadership Program",
-    provider: "SANS Institute",
-    format: "In-person",
-    cost_usd: 7500,
-    location_state: "Virginia",
-    accreditation_body: "SANS",
-    duration_weeks: 2,
-    url: "https://www.sans.org/cyber-security-courses/ciso-training/",
-    is_approved: true,
-    custom_fields: {},
-    created_at: "2024-01-01T00:00:00Z",
-  },
-  {
-    id: "t2",
-    name: "Certified Information Systems Security Professional (CISSP) Prep",
-    provider: "ISC2",
-    format: "Online",
-    cost_usd: 0,
-    location_state: null,
-    accreditation_body: "ISC2",
-    duration_weeks: 12,
-    url: "https://www.isc2.org/certifications/cissp",
-    is_approved: true,
-    custom_fields: {},
-    created_at: "2024-02-01T00:00:00Z",
-  },
-  {
-    id: "t3",
-    name: "Cloud Security Architecture Bootcamp",
-    provider: "Cloud Security Alliance",
-    format: "Hybrid",
-    cost_usd: 3500,
-    location_state: "California",
-    accreditation_body: "CSA",
-    duration_weeks: 4,
-    url: "https://cloudsecurityalliance.org/education/",
-    is_approved: true,
-    custom_fields: {},
-    created_at: "2024-03-01T00:00:00Z",
-  },
-  {
-    id: "t4",
-    name: "Executive Cyber Risk Management",
-    provider: "Carnegie Mellon SEI",
-    format: "In-person",
-    cost_usd: 5000,
-    location_state: "Pennsylvania",
-    accreditation_body: "CMU",
-    duration_weeks: 1,
-    url: "https://www.sei.cmu.edu/education-outreach/",
-    is_approved: true,
-    custom_fields: {},
-    created_at: "2024-03-15T00:00:00Z",
-  },
-  {
-    id: "t5",
-    name: "GIAC Security Leadership Certification (GSLC)",
-    provider: "GIAC",
-    format: "Online",
-    cost_usd: 2499,
-    location_state: null,
-    accreditation_body: "GIAC",
-    duration_weeks: 8,
-    url: "https://www.giac.org/certifications/security-leadership/",
-    is_approved: true,
-    custom_fields: {},
-    created_at: "2024-04-01T00:00:00Z",
-  },
-  {
-    id: "t6",
-    name: "Zero Trust Architecture Workshop",
-    provider: "NIST / Cybersecurity Collaborative",
-    format: "Hybrid",
-    cost_usd: 1200,
-    location_state: "Maryland",
-    accreditation_body: "NIST",
-    duration_weeks: 3,
-    url: "https://www.nist.gov/cybersecurity",
-    is_approved: true,
-    custom_fields: {},
-    created_at: "2024-05-01T00:00:00Z",
-  },
-];
+const programs = allPrograms as TrainingProgram[];
 
-const formats = ["All", "In-person", "Online", "Hybrid"];
-const states = [
-  "All",
-  "California",
-  "Maryland",
-  "Pennsylvania",
-  "Virginia",
-  "New York",
-  "Texas",
-];
-const accreditationBodies = [
-  "All",
-  "SANS",
-  "ISC2",
-  "CSA",
-  "CMU",
-  "GIAC",
-  "NIST",
-];
-const durations = ["All", "1 week", "2-4 weeks", "5-8 weeks", "9+ weeks"];
+// Derive unique formats from real data
+const formatSet = new Set(programs.map((p) => p.format).filter(Boolean));
+const formats = ["All", ...Array.from(formatSet).sort()] as string[];
+
+// Derive unique accreditation bodies from real data
+const accredSet = new Set(
+  programs.map((p) => p.accreditation_body).filter(Boolean)
+);
+const accreditationBodies = ["All", ...Array.from(accredSet).sort()] as string[];
 
 export default function TrainingPage() {
   const [search, setSearch] = useState("");
   const [formatFilter, setFormatFilter] = useState("All");
-  const [stateFilter, setStateFilter] = useState("All");
   const [accredFilter, setAccredFilter] = useState("All");
-  const [durationFilter, setDurationFilter] = useState("All");
-  const [costFilter, setCostFilter] = useState("All");
 
   const filtered = useMemo(() => {
-    let results = [...mockPrograms];
+    let results = [...programs];
 
     if (search) {
       const q = search.toLowerCase();
@@ -145,58 +47,29 @@ export default function TrainingPage() {
     if (formatFilter !== "All") {
       results = results.filter((p) => p.format === formatFilter);
     }
-    if (stateFilter !== "All") {
-      results = results.filter((p) => p.location_state === stateFilter);
-    }
     if (accredFilter !== "All") {
       results = results.filter((p) => p.accreditation_body === accredFilter);
     }
-    if (durationFilter !== "All") {
-      results = results.filter((p) => {
-        const w = p.duration_weeks ?? 0;
-        switch (durationFilter) {
-          case "1 week":
-            return w <= 1;
-          case "2-4 weeks":
-            return w >= 2 && w <= 4;
-          case "5-8 weeks":
-            return w >= 5 && w <= 8;
-          case "9+ weeks":
-            return w >= 9;
-          default:
-            return true;
-        }
-      });
-    }
-    if (costFilter !== "All") {
-      results = results.filter((p) => {
-        const c = p.cost_usd ?? 0;
-        switch (costFilter) {
-          case "Free":
-            return c === 0;
-          case "Under $1,000":
-            return c > 0 && c < 1000;
-          case "$1,000 - $5,000":
-            return c >= 1000 && c <= 5000;
-          case "$5,000+":
-            return c > 5000;
-          default:
-            return true;
-        }
-      });
-    }
 
     return results;
-  }, [search, formatFilter, stateFilter, accredFilter, durationFilter, costFilter]);
+  }, [search, formatFilter, accredFilter]);
 
   const formatBadgeColor = (format: string | null) => {
     switch (format) {
-      case "In-person":
+      case "Boot Camp":
+        return "bg-red-100 text-red-800";
+      case "Certificate Program":
         return "bg-green-100 text-green-800";
-      case "Online":
-        return "bg-blue-100 text-blue-800";
-      case "Hybrid":
+      case "Coaching":
+        return "bg-yellow-100 text-yellow-800";
+      case "Executive Education":
         return "bg-purple-100 text-purple-800";
+      case "Learning Path":
+        return "bg-blue-100 text-blue-800";
+      case "Professional Certification":
+        return "bg-indigo-100 text-indigo-800";
+      case "Summit/Conference":
+        return "bg-pink-100 text-pink-800";
       default:
         return "";
     }
@@ -211,8 +84,8 @@ export default function TrainingPage() {
             CISO Training Programs
           </h1>
           <p className="text-center text-[#0A0A0A]/60 mt-3 max-w-xl mx-auto">
-            Discover executive security training, certifications, and leadership
-            programs
+            {programs.length} executive security training programs,
+            certifications, and leadership courses
           </p>
         </div>
       </section>
@@ -237,7 +110,7 @@ export default function TrainingPage() {
               value={formatFilter}
               onValueChange={(val) => setFormatFilter(val as string)}
             >
-              <SelectTrigger className="w-[140px]">
+              <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="Format" />
               </SelectTrigger>
               <SelectContent>
@@ -250,64 +123,16 @@ export default function TrainingPage() {
             </Select>
 
             <Select
-              value={costFilter}
-              onValueChange={(val) => setCostFilter(val as string)}
-            >
-              <SelectTrigger className="w-[160px]">
-                <SelectValue placeholder="Cost Range" />
-              </SelectTrigger>
-              <SelectContent>
-                {["All", "Free", "Under $1,000", "$1,000 - $5,000", "$5,000+"].map((c) => (
-                  <SelectItem key={c} value={c}>
-                    {c}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select
-              value={stateFilter}
-              onValueChange={(val) => setStateFilter(val as string)}
-            >
-              <SelectTrigger className="w-[160px]">
-                <SelectValue placeholder="Location" />
-              </SelectTrigger>
-              <SelectContent>
-                {states.map((s) => (
-                  <SelectItem key={s} value={s}>
-                    {s}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select
               value={accredFilter}
               onValueChange={(val) => setAccredFilter(val as string)}
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[220px]">
                 <SelectValue placeholder="Accreditation" />
               </SelectTrigger>
               <SelectContent>
                 {accreditationBodies.map((a) => (
                   <SelectItem key={a} value={a}>
                     {a}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select
-              value={durationFilter}
-              onValueChange={(val) => setDurationFilter(val as string)}
-            >
-              <SelectTrigger className="w-[140px]">
-                <SelectValue placeholder="Duration" />
-              </SelectTrigger>
-              <SelectContent>
-                {durations.map((d) => (
-                  <SelectItem key={d} value={d}>
-                    {d}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -326,7 +151,7 @@ export default function TrainingPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((program) => (
-                <Card key={program.id} className="bg-white">
+                <Card key={program.id} className="bg-white flex flex-col">
                   <CardHeader>
                     <div className="flex items-start justify-between gap-2">
                       <CardTitle className="text-[#0A0A0A] leading-snug">
@@ -346,46 +171,86 @@ export default function TrainingPage() {
                       </p>
                     )}
                   </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="flex items-center gap-1.5 text-sm text-[#0A0A0A]/70">
-                        <DollarSign className="h-4 w-4" />
-                        {program.cost_usd === 0
-                          ? "Free"
-                          : `$${program.cost_usd?.toLocaleString()}`}
-                      </div>
+                  <CardContent className="flex-1 flex flex-col">
+                    {/* Cost and Duration */}
+                    <div className="flex flex-wrap items-center gap-4 mb-4">
+                      {program.cost_usd && (
+                        <div className="flex items-center gap-1.5 text-sm text-[#0A0A0A]/70">
+                          <DollarSign className="h-4 w-4" />
+                          {program.cost_usd}
+                        </div>
+                      )}
                       {program.duration_weeks && (
                         <div className="flex items-center gap-1.5 text-sm text-[#0A0A0A]/70">
                           <Clock className="h-4 w-4" />
-                          {program.duration_weeks}{" "}
-                          {program.duration_weeks === 1 ? "week" : "weeks"}
+                          {program.duration_weeks}
                         </div>
                       )}
                     </div>
-                    {program.accreditation_body && (
-                      <div className="mb-4">
-                        <Badge variant="outline" className="text-xs">
-                          {program.accreditation_body}
-                        </Badge>
-                      </div>
+
+                    {/* Accreditation */}
+                    {program.accreditation_body &&
+                      program.accreditation_body !== "None" && (
+                        <div className="mb-4">
+                          <Badge variant="outline" className="text-xs">
+                            {program.accreditation_body}
+                          </Badge>
+                        </div>
+                      )}
+
+                    {/* Custom Fields */}
+                    {program.custom_fields?.["Audience Level"] && (
+                      <p className="text-xs text-[#0A0A0A]/50 mb-1">
+                        Audience:{" "}
+                        <span className="font-medium text-[#0A0A0A]/70">
+                          {program.custom_fields["Audience Level"]}
+                        </span>
+                      </p>
                     )}
-                    {program.url && (
-                      <Button
-                        asChild
-                        variant="outline"
-                        size="sm"
-                        className="w-full border-navy text-navy hover:bg-navy/5"
-                      >
-                        <a
-                          href={program.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                    {program.custom_fields?.["Delivery Mode"] &&
+                      program.custom_fields["Delivery Mode"] !==
+                        "Not disclosed" && (
+                        <p className="text-xs text-[#0A0A0A]/50 mb-3">
+                          Delivery:{" "}
+                          <span className="font-medium text-[#0A0A0A]/70">
+                            {program.custom_fields["Delivery Mode"]}
+                          </span>
+                        </p>
+                      )}
+
+                    {program.custom_fields?.["Description"] && (
+                      <p className="text-sm text-[#0A0A0A]/70 line-clamp-3 mb-3">
+                        {program.custom_fields["Description"]}
+                      </p>
+                    )}
+
+                    {program.custom_fields?.["Why It Matters"] && (
+                      <p className="text-xs text-[#0A0A0A]/50 line-clamp-2 mb-4">
+                        <span className="font-medium">Why it matters:</span>{" "}
+                        {program.custom_fields["Why It Matters"]}
+                      </p>
+                    )}
+
+                    {/* Learn More Button */}
+                    <div className="mt-auto">
+                      {program.url && (
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="w-full border-navy text-navy hover:bg-navy/5"
                         >
-                          Learn More
-                          <ExternalLink className="h-3.5 w-3.5 ml-2" />
-                        </a>
-                      </Button>
-                    )}
+                          <a
+                            href={program.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Learn More
+                            <ExternalLink className="h-3.5 w-3.5 ml-2" />
+                          </a>
+                        </Button>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               ))}

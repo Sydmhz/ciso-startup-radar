@@ -36,12 +36,14 @@ export interface Startup {
   website: string | null;
   founder_name: string | null;
   founder_linkedin: string | null;
+  founders_all?: string | null;
+  linkedin_url?: string | null;
   vc_backers: string[] | null;
   is_featured: boolean;
   is_approved: boolean;
   custom_fields: Record<string, string>;
-  submitted_by: string | null;
-  created_at: string;
+  submitted_by?: string | null;
+  created_at?: string;
 }
 
 export interface CisoDirectoryEntry {
@@ -56,7 +58,7 @@ export interface CisoDirectoryEntry {
   appointed_date: string | null;
   active: boolean;
   custom_fields: Record<string, string>;
-  last_updated: string;
+  last_updated?: string;
 }
 
 export interface TrainingProgram {
@@ -64,14 +66,14 @@ export interface TrainingProgram {
   name: string;
   provider: string | null;
   format: string | null;
-  cost_usd: number | null;
+  cost_usd: string | null;
   location_state: string | null;
   accreditation_body: string | null;
-  duration_weeks: number | null;
+  duration_weeks: string | null;
   url: string | null;
   is_approved: boolean;
   custom_fields: Record<string, string>;
-  created_at: string;
+  created_at?: string;
 }
 
 export interface VenturePost {

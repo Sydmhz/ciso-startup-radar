@@ -14,40 +14,16 @@ import {
   Shield,
 } from "lucide-react";
 import type { Startup } from "@/lib/types";
+import allStartups from "@/lib/data/startups.json";
 
-// Mock data for a single startup
-const mockStartup: Startup = {
-  id: "1",
-  name: "VaultShield",
-  slug: "vaultshield",
-  description:
-    "VaultShield is a zero-trust data protection platform built for hybrid cloud environments. Our platform provides real-time threat detection, automated incident response, and continuous compliance monitoring across AWS, Azure, and GCP. Founded by former security engineers from CrowdStrike and Palo Alto Networks, VaultShield helps enterprise security teams protect sensitive data without slowing down cloud adoption.",
-  sector: "Cloud Security",
-  funding_stage: "Series A",
-  total_raised: "$12M",
-  founding_year: 2022,
-  hq: "San Francisco, CA",
-  website: "https://vaultshield.io",
-  founder_name: "Marcus Rivera",
-  founder_linkedin: "https://linkedin.com/in/marcusrivera",
-  vc_backers: ["Sequoia Capital", "Cyberstarts", "YL Ventures"],
-  is_featured: true,
-  is_approved: true,
-  custom_fields: {
-    "Team Size": "45",
-    "Key Customers": "Fortune 500 Financial Services",
-    "Compliance Certifications": "SOC 2 Type II, ISO 27001",
-    "Integration Partners": "Splunk, CrowdStrike, Okta",
-  },
-  submitted_by: null,
-  created_at: "2024-01-15T00:00:00Z",
-};
+const startups = allStartups as Startup[];
 
-// In a real app, this would fetch from the database
 function getStartup(slug: string): Startup | null {
-  if (slug === mockStartup.slug) return mockStartup;
-  // Return mock data for any slug to demonstrate the page
-  return { ...mockStartup, slug, name: slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) };
+  return startups.find((s) => s.slug === slug) || null;
+}
+
+export async function generateStaticParams() {
+  return startups.map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({
@@ -57,8 +33,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const startup = getStartup(params.slug);
   return {
-    title: startup ? `${startup.name} - Cybersecurity Startup Directory` : "Startup Not Found",
-    description: startup?.description?.slice(0, 160) ?? "Startup profile on CISOStartupRadar",
+    title: startup
+      ? `${startup.name} - Cybersecurity Startup Directory`
+      : "Startup Not Found",
+    description:
+      startup?.description?.slice(0, 160) ??
+      "Startup profile on CISOStartupRadar",
   };
 }
 
@@ -78,10 +58,7 @@ export default function StartupDetailPage({
         <p className="text-[#0A0A0A]/60 mb-6">
           The startup you are looking for does not exist or has been removed.
         </p>
-        <Button
-          asChild
-          className="bg-navy hover:bg-navy/90 text-white"
-        >
+        <Button asChild className="bg-navy hover:bg-navy/90 text-white">
           <Link href="/directory">Back to Directory</Link>
         </Button>
       </div>
@@ -120,6 +97,12 @@ export default function StartupDetailPage({
       value: startup.website,
       isLink: true,
     },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: startup.linkedin_url,
+      isLink: true,
+    },
   ];
 
   const customEntries = Object.entries(startup.custom_fields || {});
@@ -143,11 +126,7 @@ export default function StartupDetailPage({
         {/* Header */}
         <div className="flex items-start gap-4 mb-8">
           <div className="w-16 h-16 rounded-xl bg-navy/10 flex items-center justify-center text-navy font-medium text-xl shrink-0">
-            {startup.name
-              .split(" ")
-              .map((w) => w[0])
-              .join("")
-              .slice(0, 2)}
+            {startup.name.charAt(0)}
           </div>
           <div>
             <div className="flex items-center gap-3">
@@ -197,7 +176,7 @@ export default function StartupDetailPage({
                         rel="noopener noreferrer"
                         className="text-sm font-medium text-blue-cta hover:underline"
                       >
-                        {item.value.replace(/^https?:\/\//, "")}
+                        {item.value.replace(/^https?:\/\/(www\.)?/, "")}
                       </a>
                     ) : (
                       <p className="text-sm font-medium text-[#0A0A0A]">
@@ -214,7 +193,7 @@ export default function StartupDetailPage({
         {startup.founder_name && (
           <div className="mb-10">
             <h2 className="text-lg font-medium text-[#0A0A0A] mb-3">
-              Founder
+              {startup.founders_all ? "Founders" : "Founder"}
             </h2>
             <Card className="bg-gray-50 border-0">
               <CardContent className="py-1">
@@ -228,9 +207,11 @@ export default function StartupDetailPage({
                     </div>
                     <div>
                       <p className="font-medium text-[#0A0A0A]">
-                        {startup.founder_name}
+                        {startup.founders_all || startup.founder_name}
                       </p>
-                      <p className="text-sm text-[#0A0A0A]/50">Founder</p>
+                      <p className="text-sm text-[#0A0A0A]/50">
+                        {startup.founders_all ? "Co-Founders" : "Founder"}
+                      </p>
                     </div>
                   </div>
                   {startup.founder_linkedin && (

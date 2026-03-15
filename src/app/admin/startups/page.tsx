@@ -312,7 +312,7 @@ export default function StartupsPage() {
       header: "Date",
       cell: ({ row }) => (
         <span className="text-xs text-muted-foreground">
-          {formatDate(row.original.created_at)}
+          {row.original.created_at ? formatDate(row.original.created_at) : "—"}
         </span>
       ),
     },
@@ -590,7 +590,7 @@ export default function StartupsPage() {
                   />
                   <DetailRow
                     label="Date"
-                    value={formatDate(detailStartup.created_at)}
+                    value={detailStartup.created_at ? formatDate(detailStartup.created_at) : "—"}
                   />
                   <DetailRow
                     label="Status"

@@ -33,8 +33,8 @@ const features = [
 ];
 
 const stats = [
-  { value: "250+", label: "Startups Tracked" },
-  { value: "100+", label: "Verified CISOs" },
+  { value: "551", label: "Startups Tracked" },
+  { value: "290+", label: "Verified CISOs" },
   { value: "Updated", label: "Monthly" },
 ];
 

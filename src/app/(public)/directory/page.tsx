@@ -15,155 +15,36 @@ import {
 } from "@/components/ui/select";
 import { Search, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import type { Startup } from "@/lib/types";
+import allStartups from "@/lib/data/startups.json";
 
-const mockStartups: Startup[] = [
-  {
-    id: "1",
-    name: "VaultShield",
-    slug: "vaultshield",
-    description:
-      "Zero-trust data protection platform for hybrid cloud environments with real-time threat detection and automated response.",
-    sector: "Cloud Security",
-    funding_stage: "Series A",
-    total_raised: "$12M",
-    founding_year: 2022,
-    hq: "San Francisco, CA",
-    website: "https://vaultshield.io",
-    founder_name: "Marcus Rivera",
-    founder_linkedin: "https://linkedin.com/in/marcusrivera",
-    vc_backers: ["Sequoia Capital", "Cyberstarts"],
-    is_featured: true,
-    is_approved: true,
-    custom_fields: {},
-    submitted_by: null,
-    created_at: "2024-01-15T00:00:00Z",
-  },
-  {
-    id: "2",
-    name: "ThreatCanvas",
-    slug: "threatcanvas",
-    description:
-      "AI-powered threat intelligence aggregation and visualization for SOC teams. Correlates signals across OSINT, dark web, and internal telemetry.",
-    sector: "Threat Intel",
-    funding_stage: "Seed",
-    total_raised: "$4.5M",
-    founding_year: 2023,
-    hq: "Austin, TX",
-    website: "https://threatcanvas.com",
-    founder_name: "Priya Sharma",
-    founder_linkedin: "https://linkedin.com/in/priyasharma",
-    vc_backers: ["YL Ventures", "Ten Eleven Ventures"],
-    is_featured: false,
-    is_approved: true,
-    custom_fields: {},
-    submitted_by: null,
-    created_at: "2024-03-10T00:00:00Z",
-  },
-  {
-    id: "3",
-    name: "IdentityForge",
-    slug: "identityforge",
-    description:
-      "Next-generation identity governance and privileged access management built for decentralized workforces and multi-cloud architectures.",
-    sector: "IAM",
-    funding_stage: "Series B",
-    total_raised: "$35M",
-    founding_year: 2021,
-    hq: "New York, NY",
-    website: "https://identityforge.io",
-    founder_name: "James O'Brien",
-    founder_linkedin: "https://linkedin.com/in/jamesobrien",
-    vc_backers: ["Insight Partners", "Forgepoint Capital"],
-    is_featured: true,
-    is_approved: true,
-    custom_fields: {},
-    submitted_by: null,
-    created_at: "2024-02-20T00:00:00Z",
-  },
-  {
-    id: "4",
-    name: "SecurePipeline",
-    slug: "securepipeline",
-    description:
-      "DevSecOps platform that embeds security testing directly into CI/CD pipelines with policy-as-code enforcement and SBOM generation.",
-    sector: "DevSecOps",
-    funding_stage: "Seed",
-    total_raised: "$6M",
-    founding_year: 2023,
-    hq: "Seattle, WA",
-    website: "https://securepipeline.dev",
-    founder_name: "Anika Patel",
-    founder_linkedin: "https://linkedin.com/in/anikapatel",
-    vc_backers: ["Decibel Partners"],
-    is_featured: false,
-    is_approved: true,
-    custom_fields: {},
-    submitted_by: null,
-    created_at: "2024-04-05T00:00:00Z",
-  },
-  {
-    id: "5",
-    name: "ComplianceOS",
-    slug: "complianceos",
-    description:
-      "Automated GRC platform that maps controls across SOC 2, ISO 27001, NIST, and CMMC frameworks with continuous monitoring and audit-ready reporting.",
-    sector: "GRC",
-    funding_stage: "Series A",
-    total_raised: "$18M",
-    founding_year: 2022,
-    hq: "Boston, MA",
-    website: "https://complianceos.com",
-    founder_name: "Rachel Kim",
-    founder_linkedin: "https://linkedin.com/in/rachelkim",
-    vc_backers: ["Bessemer Venture Partners", "Rally Ventures"],
-    is_featured: false,
-    is_approved: true,
-    custom_fields: {},
-    submitted_by: null,
-    created_at: "2024-01-30T00:00:00Z",
-  },
-  {
-    id: "6",
-    name: "NetSentinel",
-    slug: "netsentinel",
-    description:
-      "Network detection and response platform using behavioral AI to identify lateral movement and advanced persistent threats in real time.",
-    sector: "Network Security",
-    funding_stage: "Pre-seed",
-    total_raised: "$2M",
-    founding_year: 2024,
-    hq: "Denver, CO",
-    website: "https://netsentinel.io",
-    founder_name: "Carlos Mendez",
-    founder_linkedin: "https://linkedin.com/in/carlosmendez",
-    vc_backers: ["Techstars"],
-    is_featured: false,
-    is_approved: true,
-    custom_fields: {},
-    submitted_by: null,
-    created_at: "2024-05-12T00:00:00Z",
-  },
-];
+const startups = allStartups as Startup[];
 
-const fundingStages = [
-  "All",
-  "Pre-seed",
-  "Seed",
-  "Series A",
-  "Series B",
-  "Series C+",
-];
-const sectors = [
-  "All",
-  "IAM",
-  "AppSec",
-  "Cloud Security",
-  "Threat Intel",
-  "GRC",
-  "DevSecOps",
-  "Network Security",
-  "Data Security",
-];
+// Derive unique sectors from real data, sorted alphabetically
+const sectorSet = new Set(startups.map((s) => s.sector).filter(Boolean));
+const sectors = ["All", ...Array.from(sectorSet).sort()] as string[];
+
+// Group funding stages into broader categories for filtering
+const fundingStageGroups: Record<string, (stage: string) => boolean> = {
+  "Pre-seed / Angel": (s) =>
+    /pre.?seed|angel|bootstrap|grant|incubator/i.test(s),
+  Seed: (s) => /^seed/i.test(s) || /yc\s/i.test(s) || /y combinator/i.test(s),
+  "Series A": (s) => /series a/i.test(s) && !/post/i.test(s),
+  "Series B": (s) => /series b/i.test(s),
+  "Series C+": (s) =>
+    /series [c-z]/i.test(s) && !/series a/i.test(s) && !/series b/i.test(s),
+  "Growth / PE": (s) => /growth|private equity|pe.?backed/i.test(s),
+  Acquired: (s) => /acquired/i.test(s),
+};
+const fundingStages = ["All", ...Object.keys(fundingStageGroups)];
+
+function matchesFundingGroup(
+  stage: string | null,
+  group: string
+): boolean {
+  if (!stage) return false;
+  const matcher = fundingStageGroups[group];
+  return matcher ? matcher(stage) : false;
+}
 
 export default function DirectoryPage() {
   const [search, setSearch] = useState("");
@@ -171,21 +52,24 @@ export default function DirectoryPage() {
   const [sectorFilter, setSectorFilter] = useState("All");
   const [vcBacked, setVcBacked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 6;
+  const perPage = 20;
 
   const filtered = useMemo(() => {
-    let results = [...mockStartups];
+    let results = [...startups];
 
     if (search) {
       const q = search.toLowerCase();
       results = results.filter(
         (s) =>
           s.name.toLowerCase().includes(q) ||
-          (s.description && s.description.toLowerCase().includes(q))
+          (s.description && s.description.toLowerCase().includes(q)) ||
+          (s.sector && s.sector.toLowerCase().includes(q))
       );
     }
     if (fundingFilter !== "All") {
-      results = results.filter((s) => s.funding_stage === fundingFilter);
+      results = results.filter((s) =>
+        matchesFundingGroup(s.funding_stage, fundingFilter)
+      );
     }
     if (sectorFilter !== "All") {
       results = results.filter((s) => s.sector === sectorFilter);
@@ -212,6 +96,15 @@ export default function DirectoryPage() {
     currentPage * perPage
   );
 
+  // Show a window of page numbers around the current page
+  const pageWindow = 5;
+  const startPage = Math.max(1, currentPage - Math.floor(pageWindow / 2));
+  const endPage = Math.min(totalPages, startPage + pageWindow - 1);
+  const visiblePages = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => startPage + i
+  );
+
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
@@ -221,7 +114,8 @@ export default function DirectoryPage() {
             Cybersecurity Startup Directory
           </h1>
           <p className="text-center text-[#0A0A0A]/60 mt-3 max-w-xl mx-auto">
-            Discover curated cybersecurity startups vetted by security leaders
+            {filtered.length} curated cybersecurity startups vetted by security
+            leaders
           </p>
         </div>
       </section>
@@ -233,7 +127,7 @@ export default function DirectoryPage() {
           <div className="relative max-w-xl mx-auto">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#0A0A0A]/40" />
             <Input
-              placeholder="Search startups by name or description..."
+              placeholder="Search startups by name, description, or sector..."
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
@@ -252,7 +146,7 @@ export default function DirectoryPage() {
                 setCurrentPage(1);
               }}
             >
-              <SelectTrigger className="w-[160px]">
+              <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Funding Stage" />
               </SelectTrigger>
               <SelectContent>
@@ -271,7 +165,7 @@ export default function DirectoryPage() {
                 setCurrentPage(1);
               }}
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[220px]">
                 <SelectValue placeholder="Sector" />
               </SelectTrigger>
               <SelectContent>
@@ -315,9 +209,7 @@ export default function DirectoryPage() {
                 <Card
                   key={startup.id}
                   className={`relative bg-white ${
-                    startup.is_featured
-                      ? "ring-2 ring-amber-400"
-                      : ""
+                    startup.is_featured ? "ring-2 ring-amber-400" : ""
                   }`}
                 >
                   {startup.is_featured && (
@@ -331,13 +223,9 @@ export default function DirectoryPage() {
                   <CardHeader>
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center text-navy font-medium text-sm shrink-0">
-                        {startup.name
-                          .split(" ")
-                          .map((w) => w[0])
-                          .join("")
-                          .slice(0, 2)}
+                        {startup.name.charAt(0)}
                       </div>
-                      <CardTitle className="text-[#0A0A0A]">
+                      <CardTitle className="text-[#0A0A0A] line-clamp-1">
                         {startup.name}
                       </CardTitle>
                     </div>
@@ -346,7 +234,7 @@ export default function DirectoryPage() {
                     <p className="text-sm text-[#0A0A0A]/70 line-clamp-2 mb-4">
                       {startup.description}
                     </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2 mb-3">
                       {startup.funding_stage && (
                         <Badge variant="secondary">
                           {startup.funding_stage}
@@ -356,6 +244,14 @@ export default function DirectoryPage() {
                         <Badge variant="outline">{startup.sector}</Badge>
                       )}
                     </div>
+                    {startup.custom_fields?.["Galaxy Growth Score"] && (
+                      <p className="text-xs text-[#0A0A0A]/50 mb-3">
+                        Galaxy Growth Score:{" "}
+                        <span className="font-medium text-navy">
+                          {startup.custom_fields["Galaxy Growth Score"]}
+                        </span>
+                      </p>
+                    )}
                     <Button
                       asChild
                       variant="outline"
@@ -384,22 +280,48 @@ export default function DirectoryPage() {
                 <ChevronLeft className="h-4 w-4 mr-1" />
                 Previous
               </Button>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
+              {startPage > 1 && (
+                <>
                   <Button
-                    key={page}
-                    variant={page === currentPage ? "default" : "outline"}
+                    variant="outline"
                     size="sm"
-                    onClick={() => setCurrentPage(page)}
-                    className={
-                      page === currentPage
-                        ? "bg-navy hover:bg-navy/90 text-white"
-                        : ""
-                    }
+                    onClick={() => setCurrentPage(1)}
                   >
-                    {page}
+                    1
                   </Button>
-                )
+                  {startPage > 2 && (
+                    <span className="text-[#0A0A0A]/40 px-1">...</span>
+                  )}
+                </>
+              )}
+              {visiblePages.map((page) => (
+                <Button
+                  key={page}
+                  variant={page === currentPage ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCurrentPage(page)}
+                  className={
+                    page === currentPage
+                      ? "bg-navy hover:bg-navy/90 text-white"
+                      : ""
+                  }
+                >
+                  {page}
+                </Button>
+              ))}
+              {endPage < totalPages && (
+                <>
+                  {endPage < totalPages - 1 && (
+                    <span className="text-[#0A0A0A]/40 px-1">...</span>
+                  )}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage(totalPages)}
+                  >
+                    {totalPages}
+                  </Button>
+                </>
               )}
               <Button
                 variant="outline"

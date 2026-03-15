@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -24,28 +23,32 @@ import {
 
 const summaryCards = [
   {
-    title: "Total Users",
-    icon: Users,
+    title: "Startups Listed",
+    icon: Rocket,
     color: "text-blue-cta",
     bgColor: "bg-blue-cta/10",
+    value: "551",
   },
   {
     title: "Verified CISOs",
     icon: ShieldCheck,
     color: "text-navy",
     bgColor: "bg-navy/10",
+    value: "290",
   },
   {
-    title: "Active Founders",
-    icon: Rocket,
+    title: "Training Programs",
+    icon: Users,
     color: "text-emerald-600",
     bgColor: "bg-emerald-50",
+    value: "16",
   },
   {
     title: "MRR",
     icon: DollarSign,
     color: "text-amber-600",
     bgColor: "bg-amber-50",
+    value: "$0",
   },
 ];
 
@@ -101,9 +104,8 @@ export default function AdminDashboard() {
                 </div>
               </CardHeader>
               <CardContent>
-                <Skeleton className="h-8 w-20" />
-                <p className="mt-1 text-xs text-muted-foreground">
-                  <span className="text-muted-foreground">&mdash;</span>
+                <p className="text-2xl font-bold text-[#0A0A0A]">
+                  {card.value}
                 </p>
               </CardContent>
             </Card>

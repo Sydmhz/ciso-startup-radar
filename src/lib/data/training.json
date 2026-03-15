@@ -1,0 +1,306 @@
+[
+  {
+    "id": "1",
+    "name": "Chief Information Security Officer (CISO) Certificate Program",
+    "provider": "Carnegie Mellon University\u2019s Heinz College and CERT Division of Software Engineering Institute (SEI)",
+    "format": "Certificate Program",
+    "cost_usd": "$19,500 ($15,600 discounted)",
+    "location_state": "North America",
+    "accreditation_body": "Chief Information Security Officer Certificate",
+    "duration_weeks": "Six-month program",
+    "url": "https://www.heinz.cmu.edu/programs/executive-education/chief-information-security-officer-certificate",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Hybrid",
+      "Description": "Targets experienced cyber leaders and technology managers aspiring to CISO roles, blending interdisciplinary coursework like \"Role of the CISO,\" \"Advanced Cyber Risk Management,\" and \"Cyber Law\" with hands-on practicum. Covers business acumen, technical cybersecurity expertise, and practical scenarios for leading at executive levels in government and industry.",
+      "Why It Matters": "Builds networks with peers (all with 7+ years experience); provides future modules access for continuing education and MSIT tuition discount up to $40,000; prepares for operational resilience, threat management, cyber risk management, and insider threat per alumni testimonials.",
+      "Sources": "[Official Program Page](https://www.heinz.cmu.edu/programs/executive-education/chief-information-security-officer-certificate)"
+    }
+  },
+  {
+    "id": "2",
+    "name": "CISO Executive Coaching",
+    "provider": "IANS Research",
+    "format": "Coaching",
+    "cost_usd": "Not disclosed",
+    "location_state": "Global",
+    "accreditation_body": "None",
+    "duration_weeks": "Not disclosed",
+    "url": "https://www.iansresearch.com/what-we-do/professional-development/ciso-executive-coaching",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Not disclosed",
+      "Description": "A personalized executive coaching program designed and delivered by CISOs for CISOs. It provides tools to operate within the C-Suite and foster leadership development across teams through one-on-one faculty coaching sessions, Leadership Competencies Assessment, and live faculty-led board roundtables. Targeted at CISOs and their key reports needing to embed cybersecurity insight and leadership into business growth and protection.",
+      "Why It Matters": "This program equips current and aspiring CISOs with essential C-Suite leadership skills to shape business outcomes while managing cybersecurity risks, drawing from 30+ faculty coaches across 20 industries. It helps elevate security leadership, navigate executive challenges, and develop high-performing teams.",
+      "Sources": "[IANS CISO Executive Coaching page](https://www.iansresearch.com/what-we-do/professional-development/ciso-executive-coaching), [IANS Professional Development](https://www.iansresearch.com/what-we-do/professional-development), [IANS homepage](https://www.iansresearch.com/)"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Next Generation Chief Information Security Officer (CISO) Academy",
+    "provider": "Deloitte",
+    "format": "Executive Education",
+    "cost_usd": "Not disclosed",
+    "location_state": "North America",
+    "accreditation_body": "None",
+    "duration_weeks": "3 days",
+    "url": "https://www.deloitte.com/us/en/services/consulting/about/nextgen-academy-cultivating-future-leaders-through-nextgen-programs-and-training.html",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "In-Person",
+      "Description": "The Next Generation CISO Academy is an exclusive interactive leadership development experience designed for aspiring CISOs, featuring keynote speakers from C-suite executives and specialists. It focuses on the evolving CISO role through pillars of perspective, reputation, and empowerment to position participants for success. Participation opens access to broader Deloitte offerings including insights, connections, and custom services for security leaders.",
+      "Why It Matters": "This academy equips aspiring and new CISOs with essential business leadership competencies beyond technical security, fostering peer networks and strategic insights critical for C-suite influence. It supports career progression in the shifting demands of the CISO role amid evolving cyber threats and business integration.",
+      "Sources": "[Deloitte NextGen Academy Page](https://www.deloitte.com/us/en/services/consulting/about/nextgen-academy-cultivating-future-leaders-through-nextgen-programs-and-training.html), [Deloitte CISO Program Page](https://www.deloitte.com/us/en/programs/chief-information-officer/services/ciso-program-offerings-resources.html), [Next Academy Nov 12-14 2025](https://www.deloitte.com/us/en/services/consulting/about/nextgen-academy-cultivating-future-leaders-through-nextgen-programs-and-training.html)"
+    }
+  },
+  {
+    "id": "4",
+    "name": "EC-Council CCISO Boot Camp",
+    "provider": "Training Camp",
+    "format": "Boot Camp",
+    "cost_usd": "Not disclosed",
+    "location_state": "North America",
+    "accreditation_body": "CCISO",
+    "duration_weeks": "5 days",
+    "url": "https://trainingcamp.com/training/cciso-bootcamp/",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Hybrid",
+      "Description": "Intensive 5-day boot camp covers all domains of the CCISO certification: Governance, Risk Management, Controls & Audit Management, Program Management & Operations, Strategic Planning, Finance, Procurement, & Vendor Management. Built for aspiring and current CISOs, senior security professionals, IT directors, security managers, and consultants. Includes hands-on exercises, real-world scenarios, 92% pass rate, exam voucher, and 180 days of coaching.Training Camp CCISO Page",
+      "Why It Matters": "Prepares current and aspiring CISOs for executive-level security leadership with 100% exam alignment, DoD 8140 recognition, and high pass rate, enabling certification that validates real-world experience in critical domains like governance and strategic planning.Training Camp CCISO Page",
+      "Sources": "[Training Camp CCISO Boot Camp](https://trainingcamp.com/training/cciso-bootcamp/), [Training Camp Locations](https://trainingcamp.com/locations/)\""
+    }
+  },
+  {
+    "id": "5",
+    "name": "Certified Chief Information Security Officer (CCISO v4)",
+    "provider": "EC-Council",
+    "format": "Professional Certification",
+    "cost_usd": "Not disclosed",
+    "location_state": "Global",
+    "accreditation_body": "CCISO",
+    "duration_weeks": "5 days",
+    "url": "https://www.eccouncil.org/train-certify/certified-chief-information-security-officer-cciso/",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Hybrid",
+      "Description": "The CCISO v4 program validates executive leadership in cybersecurity across 5 domains (GOVERN, LEAD, OPERATE, SECURE, STRATEGIZE) and 8 skill areas, with AI-enhanced focus on governance, risk management, board communication, finance, and operations. It targets experienced security professionals with 5+ years in 3/5 domains aiming for CISO roles.",
+      "Why It Matters": "CCISO equips current and aspiring CISOs with strategic executive skills beyond technical expertise, including AI-driven risk management and C-suite communication, enhancing leadership credibility in boardrooms and Fortune 500 organizations.",
+      "Sources": "[EC-Council CCISO Page](https://www.eccouncil.org/train-certify/certified-chief-information-security-officer-cciso/), [CCISO Exam Eligibility PDF](https://www.eccouncil.org/wp-content/uploads/2024/01/CCISO-Exam-Eligibility-Form-v4.1.pdf), [CCISO Training Options](https://ciso.eccouncil.org/ciso-certification/cciso-training-study-options/)"
+    }
+  },
+  {
+    "id": "6",
+    "name": "CISO Leadership: Managing a Cybersecurity Program Learning Path",
+    "provider": "LinkedIn Learning",
+    "format": "Learning Path",
+    "cost_usd": "Subscription",
+    "location_state": "Global",
+    "accreditation_body": "Certificate of Completion",
+    "duration_weeks": "8h 16m",
+    "url": "https://www.linkedin.com/learning/paths/ciso-leadership-managing-a-cybersecurity-program",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Online (Self-Paced)",
+      "Description": "This learning path covers building and managing a cybersecurity program, including threat landscape assessment, team building, security metrics, influencing executives, outsourcing, talent pipelines, awareness programs, and crisis communication. It is designed for CISOs and cybersecurity leaders to allocate budgets effectively and create business value while protecting digital assets. Comprises 8 courses totaling 8 hours 16 minutes.",
+      "Why It Matters": "Equips current and aspiring CISOs with practical strategies for program management, board influence, vendor selection, and crisis response, enhancing leadership effectiveness and organizational resilience. Helps optimize limited budgets for maximum security impact and business alignment.",
+      "Sources": "[Program page](https://www.linkedin.com/learning/paths/ciso-leadership-managing-a-cybersecurity-program), [LinkedIn Learning Certificates](https://www.linkedin.com/help/learning/answer/a705867), [Pricing info](https://www.linkedhelper.com/blog/linkedin-learning-cost/)\""
+    }
+  },
+  {
+    "id": "7",
+    "name": "Gartner/Evanta CISO Executive Summits",
+    "provider": "Gartner (via Evanta)",
+    "format": "Summit/Conference",
+    "cost_usd": "Not disclosed",
+    "location_state": "Global",
+    "accreditation_body": "None",
+    "duration_weeks": "1 day (local summits)",
+    "url": "https://www.evanta.com/ciso",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "In-Person",
+      "Description": "One-day in-person summits for CISOs featuring keynotes from practitioners and thought leaders, peer-led interactive discussions, networking, and one-on-one Peer-to-Peer Meetings. Designed for C-level security executives from leading organizations to collaborate on critical issues like cybersecurity posture, resilience, and GenAI governance. Exclusive to qualified Gartner C-level Community members across 34 global communities.",
+      "Why It Matters": "Provides unparalleled peer collaboration, validated strategies, and exclusive networking with fellow CISOs to address pressing challenges and enhance leadership in security. Enables benchmarking, insight exchange, and building lasting professional relationships critical for current and aspiring CISOs.",
+      "Sources": "[Evanta CISO page](https://www.evanta.com/ciso), [Chicago CISO Summit](https://www.evanta.com/ciso/chicago/chicago-ciso-executive-summit-8446), [Global CISO Summit](https://www.evanta.com/ciso/global/global-ciso-executive-summit-8495)"
+    }
+  },
+  {
+    "id": "8",
+    "name": "CISO Executive Certificate Program",
+    "provider": "Duke University",
+    "format": "Certificate Program",
+    "cost_usd": "$10,000",
+    "location_state": "North America",
+    "accreditation_body": "CISO Executive Certificate",
+    "duration_weeks": "6 days",
+    "url": "https://cisoeducation.duke.edu/ciso-executive-certificate-program/",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "In-Person",
+      "Description": "The CISO Executive Certificate Program, managed by Duke's Master of Engineering in Cybersecurity with collaborating schools, provides an interdisciplinary framework for effective management and leadership of cybersecurity teams. It covers governance, metrics aligned to business goals, legal/regulatory risks, high-performance team building, and risks from emerging technologies like AI and cloud. Targeted at CISOs, executives, and managers needing strategic oversight skills.",
+      "Why It Matters": "Equips current and aspiring CISOs with critical skills to provide executive oversight, develop business-aligned metrics, manage regulatory compliance including SEC rules, build teams, and assess emerging tech risks, addressing common knowledge gaps from technical promotions to leadership roles. Includes enrollment in the Cybersecurity Leadership Program for board-level responsibilities.",
+      "Sources": "[Program Page](https://cisoeducation.duke.edu/ciso-executive-certificate-program/); [FAQs](https://cisoeducation.duke.edu/faqs/); [Duke Pratt News](https://masters.pratt.duke.edu/news/duke-launched-chief-information-security-officer-executive-education-certificate-program/)"
+    }
+  },
+  {
+    "id": "9",
+    "name": "Certified virtual Chief Information Security Officer (CvCISO\u00ae) Program",
+    "provider": "SecurityStudio",
+    "format": "Professional Certification",
+    "cost_usd": "Contact for pricing",
+    "location_state": "Global",
+    "accreditation_body": "CvCISO\u00ae (Levels 1-3)",
+    "duration_weeks": "1 year",
+    "url": "https://www.securitystudio.com/academy/academy-overview",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "All Levels",
+      "Delivery Mode": "Online (Live)",
+      "Description": "The Certified virtual Chief Information Security Officer (CvCISO\u00ae) Program trains participants to build and lead information security programs as vCISOs, starting with the foundational CvCISO-1 course and progressing through advanced Level 3 courses on budgeting, communications, and complex environments. It targets aspiring and experienced vCISOs from college students to veterans, emphasizing practical skills, real-world tools, experiential requirements, and community collaboration.",
+      "Why It Matters": "This program establishes the industry standard for vCISO excellence, providing current and aspiring CISOs with practical training to consult on risk decisions, implement security programs, and advance careers through mentorship and exclusive networking in a vetted community.",
+      "Sources": "[SecurityStudio Academy Overview](https://www.securitystudio.com/academy/academy-overview), [CvCISO Foundations Course](https://www.securitystudio.com/courses/cvciso-1-foundations-course), [Academy Courses](https://www.securitystudio.com/academy/courses)\""
+    }
+  },
+  {
+    "id": "10",
+    "name": "PECB Chief Information Security Officer",
+    "provider": "PECB",
+    "format": "Professional Certification",
+    "cost_usd": "Not disclosed",
+    "location_state": "Global",
+    "accreditation_body": "PECB Certified Chief Information Security Officer",
+    "duration_weeks": "5 days",
+    "url": "https://pecb.com/en/education-and-certification-for-individuals/pecb-ciso/ciso",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Hybrid",
+      "Description": "This course equips aspiring CISOs with knowledge and skills to lead information security programs, covering fundamentals, risk management, compliance, security architecture, controls, incident/change management, awareness, monitoring, and improvement. It targets security professionals, IT managers, and executives seeking to oversee robust security measures and mitigate risks in dynamic digital environments.",
+      "Why It Matters": "This program provides current and aspiring CISOs with comprehensive expertise in leading security programs, including governance, risk management, compliance, and emerging technologies, enabling them to effectively design, implement, and improve enterprise-wide information security strategies.",
+      "Sources": "[PECB CISO Program Page](https://pecb.com/en/education-and-certification-for-individuals/pecb-ciso/ciso)"
+    }
+  },
+  {
+    "id": "11",
+    "name": "CISO Academy",
+    "provider": "Check Point Software Technologies",
+    "format": "Professional Certification",
+    "cost_usd": "Varies ($900-$4,800 USD per course/exam)",
+    "location_state": "Global",
+    "accreditation_body": "CISM, CISSP, CCSP, SSCP, CISA (via ISACA/ISC2), CompTIA SecurityX, Ready Steady Hack",
+    "duration_weeks": "Varies by course (4-5 days, 8 weeks, self-paced up to 1 year)",
+    "url": "https://www.checkpoint.com/mind/ciso-academy/",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Online (Live), Online (Self-Paced)",
+      "Description": "Global education program tailored to C-Level Executives and aspiring leaders to master cybersecurity practices, balancing tactical issues with strategic leadership. Covers threats through world-class Check Point R&D trainers via courses, exams, and podcasts with real-life CISO scenarios. Delivered through Authorized Training Partners with convenient remote access.",
+      "Why It Matters": "Provides globally-recognized certifications from ISACA and ISC2 to distinguish CISOs, enhances ability to protect organizational assets, and offers peer learning from industry leaders like HBO MAX and Siemens for strategic security leadership.",
+      "Sources": "[Check Point CISO Academy](https://www.checkpoint.com/mind/ciso-academy/); [Check Point Training Overview](https://www.checkpoint.com/services/training/); [ISACA Partnership Press Release](https://www.checkpoint.com/press-releases/isaca-courses-join-the-check-point-software-ciso-academy/)"
+    }
+  },
+  {
+    "id": "12",
+    "name": "Chief Information Security Officer Training",
+    "provider": "The Knowledge Academy",
+    "format": "Boot Camp",
+    "cost_usd": "Not disclosed",
+    "location_state": "North America",
+    "accreditation_body": "CISSP",
+    "duration_weeks": "3 days",
+    "url": "https://www.theknowledgeacademy.com/us/courses/cissp-training/chief-information-security-officer-training/new-york/",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Senior",
+      "Delivery Mode": "In-Person",
+      "Description": "This intensive 3-day bootcamp covers governance and risk management, information security controls, security program management, core competencies like cryptography and cloud security, and strategic planning across 37 modules. It equips IT professionals, cybersecurity experts, and aspiring CISOs with skills to lead and manage organizational information security programs, identify vulnerabilities, assess risks, and implement protective measures. No formal prerequisites are required.",
+      "Why It Matters": "Equips current and aspiring CISOs with comprehensive leadership skills in security program management, risk assessment, compliance, and strategic planning, validated by CISSP certification that opens doors to CISO roles and validates expertise in cybersecurity domains.",
+      "Sources": "[Program Page](https://www.theknowledgeacademy.com/us/courses/cissp-training/chief-information-security-officer-training/) | [New York Location](https://www.theknowledgeacademy.com/us/courses/cissp-training/chief-information-security-officer-training/new-york/)\""
+    }
+  },
+  {
+    "id": "13",
+    "name": "EC-Council Certified CISO Training CCISO v3",
+    "provider": "Learning Tree",
+    "format": "Professional Certification",
+    "cost_usd": "$3,850",
+    "location_state": "North America",
+    "accreditation_body": "CCISO",
+    "duration_weeks": "5 days",
+    "url": "https://www.learningtree.com/courses/cciso-certification-ciso-training/",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Hybrid",
+      "Description": "The EC-Council Certified CISO (CCISO v3) training prepares aspiring and current CISOs by covering five domains: Governance, Controls, Projects, Technical, and Strategy, focusing on executive-level application of information security management principles rather than just technical knowledge. It targets professionals with five years of IS management experience across these domains. The course includes official EC-Council curriculum and an exam voucher.",
+      "Why It Matters": "This program equips CISOs with strategic skills to align security with business goals, manage risks, budgets, and vendors from an executive perspective, while preparing for the CCISO certification that validates CISO-level competencies. It bridges technical expertise with leadership responsibilities essential for CISO roles.",
+      "Sources": "[Learning Tree CCISO Course Page](https://www.learningtree.com/courses/cciso-certification-ciso-training/), [Learning Tree Guaranteed-to-Run](https://www.learningtree.com/guaranteedtorun/), [Learning Tree Locations](https://www.learningtree.com/locations/)"
+    }
+  },
+  {
+    "id": "14",
+    "name": "Cyber Leadership Track (C-CISO + CAISO + Cyber Defense Leadership)",
+    "provider": "Tonex",
+    "format": "Learning Path",
+    "cost_usd": "Contact for pricing",
+    "location_state": "Global",
+    "accreditation_body": "C-CISO, CAISO",
+    "duration_weeks": "2 Days",
+    "url": "https://www.tonex.com/training-courses/tonex-cyber-leadership-track-c-ciso-caiso-cyber-defense-leadership/",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Not disclosed",
+      "Description": "The Cyber Leadership Track integrates Certified Chief Information Security Officer (C-CISO), Certified AI Security Officer (CAISO), and Cyber Defense Leadership principles into modules covering foundations, enterprise risk management, governance, AI/emerging tech, defense/resilience, and strategic execution. It blends executive vision with technical expertise to equip leaders to align cybersecurity strategy with organizational goals while addressing evolving threats. Targeted at CISOs, senior security leaders, IT executives, risk officers, and cybersecurity professionals.",
+      "Why It Matters": "Prepares CISOs for enterprise-level risk management, cybersecurity governance, and strategic execution that aligns cyber strategy with business goals. Develops leadership approaches to enhance cybersecurity posture and build resilience against complex threats.",
+      "Sources": "[Tonex Program Page](https://www.tonex.com/training-courses/tonex-cyber-leadership-track-c-ciso-caiso-cyber-defense-leadership/), [Tonex C-CISO Page](https://www.tonex.com/training-courses/certified-chief-information-security-officer-c-ciso/), [Tonex Courses Overview](https://www.tonex.com/courses/)"
+    }
+  },
+  {
+    "id": "15",
+    "name": "EC-Council Global CISO Forum",
+    "provider": "EC-Council",
+    "format": "Summit/Conference",
+    "cost_usd": "Not disclosed",
+    "location_state": "Global",
+    "accreditation_body": "None",
+    "duration_weeks": "2 days",
+    "url": "https://ciso.eccouncil.org",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "In-Person",
+      "Description": "The Global CISO Forum is an exclusive, invite-only event for CISOs and senior security professionals to discuss governance, risk management, enterprise security strategy, latest threats, and landscape evolution. It facilitates knowledge exchange in a closed-door setting with participants from industries worldwide.",
+      "Why It Matters": "It provides actionable insights, peer networking with global executives, and strategic discussions on pressing cybersecurity challenges, helping CISOs gain diverse perspectives and build relationships with decision-makers.",
+      "Sources": "[Global CISO Forum](https://ciso.eccouncil.org), [About the Forum](https://ciso.eccouncil.org/ciso-events/about-the-forum/), [EC-Council Search Results](tool output)"
+    }
+  },
+  {
+    "id": "16",
+    "name": "Certified Chief Information Security Officer (C-CISO) Certification Program",
+    "provider": "Tonex",
+    "format": "Professional Certification",
+    "cost_usd": "Not disclosed",
+    "location_state": "Global",
+    "accreditation_body": "Certified Chief Information Security Officer (C-CISO)",
+    "duration_weeks": "2 Days",
+    "url": "https://www.tonex.com/training-courses/certified-chief-information-security-officer-c-ciso/",
+    "is_approved": true,
+    "custom_fields": {
+      "Audience Level": "Executive",
+      "Delivery Mode": "Not disclosed",
+      "Description": "The Certified Chief Information Security Officer (C-CISO) Certification Program is designed for experienced security leaders seeking to master executive-level responsibilities in cybersecurity strategy, governance, and enterprise resilience. It covers security leadership, risk management, governance, strategy, incident management, and emerging threats through lectures, discussions, and projects. Targets CISOs, IT directors, risk officers, and senior executives.",
+      "Why It Matters": "Equips current and aspiring CISOs with frameworks to align security with business objectives, lead teams, communicate with boards, and address advanced threats, enhancing executive influence and organizational resilience.",
+      "Sources": "[Tonex C-CISO Program Page](https://www.tonex.com/training-courses/certified-chief-information-security-officer-c-ciso/), [Tonex Savings Programs](https://www.tonex.com/savings-programs/), [Tonex Live Online Courses](https://www.tonex.com/live-online-courses/)"
+    }
+  }
+]
