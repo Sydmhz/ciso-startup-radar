@@ -2,30 +2,107 @@
 
 import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
-import { Search, Linkedin, Building2, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Search,
+  Linkedin,
+  ChevronLeft,
+  ChevronRight,
+  ArrowUpDown,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { CisoDirectoryEntry } from "@/lib/types";
 import allCisos from "@/lib/data/cisos.json";
 
 const cisos = allCisos as CisoDirectoryEntry[];
 
+/* helper: extract clean company name (strip role notes like "(CSO)") */
+function cleanCompany(raw: string): string {
+  return raw.replace(/\s*\(.*?\)\s*$/, "").trim();
+}
+
+/* helper: get company favicon from clearbit */
+function companyLogoUrl(company: string): string {
+  const slug = cleanCompany(company)
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+    .replace(/\s+/g, "");
+  // Map well-known companies to their domains
+  const domainMap: Record<string, string> = {
+    apple: "apple.com", google: "google.com", meta: "meta.com", amazon: "amazon.com",
+    microsoft: "microsoft.com", netflix: "netflix.com", nike: "nike.com",
+    adobe: "adobe.com", intel: "intel.com", ibm: "ibm.com", oracle: "oracle.com",
+    cisco: "cisco.com", salesforce: "salesforce.com", walmart: "walmart.com",
+    jpmorgan: "jpmorgan.com", jpmorganchase: "jpmorganchase.com",
+    goldmansachs: "goldmansachs.com", morganstanley: "morganstanley.com",
+    bankofamerica: "bankofamerica.com", wellsfargo: "wellsfargo.com",
+    citigroup: "citigroup.com", citi: "citigroup.com",
+    unitedhealth: "unitedhealthgroup.com", unitedhealthgroup: "unitedhealthgroup.com",
+    johnson: "jnj.com", johnsonjohnson: "jnj.com",
+    procter: "pg.com", proctergamble: "pg.com",
+    exxonmobil: "exxonmobil.com", chevron: "chevron.com",
+    pfizer: "pfizer.com", merck: "merck.com", abbvie: "abbvie.com",
+    cocacola: "coca-cola.com", pepsico: "pepsico.com",
+    disney: "disney.com", waltdisney: "disney.com",
+    boeing: "boeing.com", lockheedmartin: "lockheedmartin.com",
+    generalmotors: "gm.com", ford: "ford.com", tesla: "tesla.com",
+    att: "att.com", verizon: "verizon.com", tmobile: "t-mobile.com",
+    comcast: "comcast.com", bestbuy: "bestbuy.com",
+    homedepot: "homedepot.com", lowes: "lowes.com", target: "target.com",
+    costco: "costco.com", kroger: "kroger.com",
+    ups: "ups.com", fedex: "fedex.com",
+    dollartree: "dollartree.com", halliburton: "halliburton.com",
+    rtx: "rtx.com", raytheon: "rtx.com",
+    generaldynamics: "gd.com", northropgrumman: "northropgrumman.com",
+    cvshealth: "cvshealth.com", cvs: "cvshealth.com",
+    unitedparcelservice: "ups.com",
+    deltairlines: "delta.com", delta: "delta.com",
+    americanexpress: "americanexpress.com", amex: "americanexpress.com",
+    visa: "visa.com", mastercard: "mastercard.com",
+    paypal: "paypal.com", stripe: "stripe.com",
+    uber: "uber.com", lyft: "lyft.com", airbnb: "airbnb.com",
+    travelers: "travelers.com", allstate: "allstate.com",
+    coupang: "coupang.com", paramount: "paramount.com", paramountglobal: "paramount.com",
+    freddiemac: "freddiemac.com", mckesson: "mckesson.com",
+    mondelezinternational: "mondelezinternational.com", mondelez: "mondelezinternational.com",
+    livenation: "livenationentertainment.com", livenationentertainment: "livenationentertainment.com",
+    bakerhughes: "bakerhughes.com", centene: "centene.com", corteva: "corteva.com",
+    tjx: "tjx.com",
+  };
+  const domain = domainMap[slug] || `${slug}.com`;
+  return `https://logo.clearbit.com/${domain}?size=40`;
+}
+
+type SortField = "name" | "company";
+type SortDir = "asc" | "desc";
+
 export default function CisosPage() {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 30;
+  const [sortField, setSortField] = useState<SortField>("name");
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
+  const perPage = 40;
 
   const filtered = useMemo(() => {
-    if (!search) return cisos;
-    const q = search.toLowerCase();
-    return cisos.filter(
-      (c) =>
-        c.name.toLowerCase().includes(q) ||
-        (c.company && c.company.toLowerCase().includes(q)) ||
-        (c.previous_role && c.previous_role.toLowerCase().includes(q)) ||
-        (c.custom_fields?.["Past Companies"] &&
-          c.custom_fields["Past Companies"].toLowerCase().includes(q))
-    );
-  }, [search]);
+    let results = [...cisos];
+    if (search) {
+      const q = search.toLowerCase();
+      results = results.filter(
+        (c) =>
+          c.name.toLowerCase().includes(q) ||
+          (c.company && c.company.toLowerCase().includes(q)) ||
+          (c.previous_role && c.previous_role.toLowerCase().includes(q)) ||
+          (c.custom_fields?.["Past Companies"] &&
+            c.custom_fields["Past Companies"].toLowerCase().includes(q))
+      );
+    }
+    results.sort((a, b) => {
+      const aVal = (sortField === "name" ? a.name : a.company) || "";
+      const bVal = (sortField === "name" ? b.name : b.company) || "";
+      const cmp = aVal.localeCompare(bVal);
+      return sortDir === "asc" ? cmp : -cmp;
+    });
+    return results;
+  }, [search, sortField, sortDir]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
   const paged = filtered.slice(
@@ -40,6 +117,16 @@ export default function CisosPage() {
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i
   );
+
+  function toggleSort(field: SortField) {
+    if (sortField === field) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortField(field);
+      setSortDir("asc");
+    }
+    setCurrentPage(1);
+  }
 
   return (
     <div className="bg-white min-h-screen">
@@ -86,80 +173,150 @@ export default function CisosPage() {
         </div>
       </section>
 
-      {/* Directory Grid */}
-      <section className="py-10">
+      {/* Bloomberg-style List */}
+      <section className="py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {paged.length === 0 ? (
-            <p className="text-center text-[#0A0A0A]/50 py-12">
-              No CISOs match your search. Try a different query.
-            </p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {paged.map((ciso) => {
+          {/* Table header */}
+          <div className="border border-[#E5E7EB] rounded-t-xl overflow-hidden">
+            <div
+              className="grid items-center px-5 py-3 text-[11px] font-semibold uppercase tracking-wider"
+              style={{
+                gridTemplateColumns: "1fr 1fr 1.5fr 48px",
+                background:
+                  "linear-gradient(135deg, #0A0F1C 0%, #111827 100%)",
+              }}
+            >
+              <button
+                onClick={() => toggleSort("name")}
+                className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors text-left"
+              >
+                Name
+                <ArrowUpDown className="h-3 w-3" />
+              </button>
+              <button
+                onClick={() => toggleSort("company")}
+                className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors text-left"
+              >
+                Current Company
+                <ArrowUpDown className="h-3 w-3" />
+              </button>
+              <span className="text-white/60 hidden md:block">
+                Previous Companies
+              </span>
+              <span className="text-white/60 text-center">Link</span>
+            </div>
+          </div>
+
+          {/* Rows */}
+          <div className="border-x border-b border-[#E5E7EB] rounded-b-xl overflow-hidden">
+            {paged.length === 0 ? (
+              <p className="text-center text-[#0A0A0A]/50 py-12">
+                No CISOs match your search.
+              </p>
+            ) : (
+              paged.map((ciso, idx) => {
                 const pastCompanies =
                   ciso.custom_fields?.["Past Companies"] ||
                   ciso.previous_role ||
                   "";
+                const isEven = idx % 2 === 0;
+
                 return (
                   <div
                     key={ciso.id}
-                    className="group relative border border-[#E5E7EB] rounded-xl p-5 transition-all duration-200 hover:shadow-lg hover:border-[#E5E7EB]/60"
+                    className={`grid items-center px-5 py-3.5 border-b border-[#E5E7EB]/50 last:border-b-0 transition-colors hover:bg-[#F0F4FF]/50 ${
+                      isEven ? "bg-white" : "bg-[#F8FAFC]/50"
+                    }`}
                     style={{
-                      background:
-                        "linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)",
+                      gridTemplateColumns: "1fr 1fr 1.5fr 48px",
                     }}
                   >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3 min-w-0">
-                        {/* Avatar */}
-                        <div className="w-11 h-11 rounded-full bg-[#1E3A5F]/10 flex items-center justify-center text-[#1E3A5F] font-bold text-sm shrink-0">
-                          {ciso.name
+                    {/* Name + Photo */}
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-9 h-9 rounded-full bg-[#1E3A5F]/10 flex items-center justify-center text-[#1E3A5F] font-bold text-xs shrink-0 overflow-hidden">
+                        {ciso.linkedin_url ? (
+                          <img
+                            src={`https://unavatar.io/linkedin/${ciso.linkedin_url.split("/in/")[1]?.replace(/\/$/, "")}`}
+                            alt={ciso.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.currentTarget;
+                              target.style.display = "none";
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.textContent = ciso.name
+                                  .split(" ")
+                                  .map((n) => n[0])
+                                  .join("")
+                                  .slice(0, 2);
+                              }
+                            }}
+                          />
+                        ) : (
+                          ciso.name
                             .split(" ")
                             .map((n) => n[0])
                             .join("")
-                            .slice(0, 2)}
-                        </div>
-                        <div className="min-w-0">
-                          <h3 className="font-bold text-[#0A0A0A] text-sm truncate">
-                            {ciso.name}
-                          </h3>
-                          <div className="flex items-center gap-1.5 mt-0.5">
-                            <Building2 className="h-3 w-3 text-[#0A0A0A]/30 shrink-0" />
-                            <p className="text-xs text-[#0A0A0A]/50 truncate">
-                              {ciso.company}
-                            </p>
-                          </div>
-                        </div>
+                            .slice(0, 2)
+                        )}
                       </div>
-                      {ciso.linkedin_url && (
+                      <span className="text-sm font-semibold text-[#0A0A0A] truncate">
+                        {ciso.name}
+                      </span>
+                    </div>
+
+                    {/* Current Company */}
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <img
+                        src={companyLogoUrl(ciso.company || "")}
+                        alt=""
+                        className="w-5 h-5 rounded object-contain shrink-0"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).style.display = "none";
+                        }}
+                      />
+                      <span className="text-sm text-[#0A0A0A]/70 truncate">
+                        {ciso.company}
+                      </span>
+                    </div>
+
+                    {/* Previous Companies */}
+                    <div className="hidden md:block min-w-0">
+                      {pastCompanies ? (
+                        <span className="text-xs text-[#0A0A0A]/40 truncate block">
+                          {pastCompanies}
+                        </span>
+                      ) : (
+                        <span className="text-xs text-[#0A0A0A]/20">—</span>
+                      )}
+                    </div>
+
+                    {/* LinkedIn */}
+                    <div className="flex justify-center">
+                      {ciso.linkedin_url ? (
                         <a
                           href={ciso.linkedin_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 rounded-full hover:bg-blue-50 transition-colors text-[#0A66C2] shrink-0"
+                          className="p-1.5 rounded-full hover:bg-blue-50 transition-colors text-[#0A66C2]"
                         >
                           <Linkedin className="h-4 w-4" />
                         </a>
+                      ) : (
+                        <span className="text-[#0A0A0A]/15">
+                          <Linkedin className="h-4 w-4" />
+                        </span>
                       )}
                     </div>
-
-                    {pastCompanies && (
-                      <p className="mt-3 text-xs text-[#0A0A0A]/40 leading-relaxed line-clamp-1">
-                        <span className="font-medium text-[#0A0A0A]/50">
-                          Previously:
-                        </span>{" "}
-                        {pastCompanies}
-                      </p>
-                    )}
                   </div>
                 );
-              })}
-            </div>
-          )}
+              })
+            )}
+          </div>
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-10">
+            <div className="flex items-center justify-center gap-2 mt-8">
               <Button
                 variant="outline"
                 size="sm"
