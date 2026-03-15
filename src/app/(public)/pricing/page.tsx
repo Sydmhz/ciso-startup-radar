@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, ArrowRight, Shield, Zap, Crown, Building2 } from "lucide-react";
+import { Check, ArrowRight, Zap, Crown, Building2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -9,25 +9,6 @@ export const metadata: Metadata = {
 };
 
 const tiers = [
-  {
-    name: "CISO",
-    description: "For verified security leaders",
-    price: "Free",
-    priceNote: "after verification",
-    icon: Shield,
-    features: [
-      "Full Startup Directory access",
-      "CISO peer directory",
-      "Training program listings",
-      "Venture Network access",
-      "Board & advisory seat listings",
-      "Investment deal flow",
-    ],
-    cta: "Apply Now",
-    ctaLink: "/apply",
-    highlighted: false,
-    dark: false,
-  },
   {
     name: "Founders Edition",
     description: "Launch your presence",
@@ -89,13 +70,16 @@ const tiers = [
 ];
 
 const comparisonFeatures = [
-  { name: "Startup Directory Access", ciso: true, founders: true, featured: true, enterprise: true },
-  { name: "CISO Directory Access", ciso: true, founders: false, featured: false, enterprise: true },
-  { name: "Venture Network", ciso: true, founders: false, featured: true, enterprise: true },
-  { name: "Featured Listing", ciso: false, founders: false, featured: true, enterprise: true },
-  { name: "Priority Support", ciso: false, founders: false, featured: true, enterprise: true },
-  { name: "Custom Integrations", ciso: false, founders: false, featured: false, enterprise: true },
-  { name: "Dedicated Account Manager", ciso: false, founders: false, featured: true, enterprise: true },
+  { name: "Startup Directory Access", founders: true, featured: true, enterprise: true },
+  { name: "Company Profile Page", founders: true, featured: true, enterprise: true },
+  { name: "Analytics Dashboard", founders: true, featured: true, enterprise: true },
+  { name: "Venture Network", founders: false, featured: true, enterprise: true },
+  { name: "Featured Listing", founders: false, featured: true, enterprise: true },
+  { name: "Unlimited CISO Outreach", founders: false, featured: true, enterprise: true },
+  { name: "Priority Support", founders: false, featured: true, enterprise: true },
+  { name: "Custom Integrations & API", founders: false, featured: false, enterprise: true },
+  { name: "Executive Introductions", founders: false, featured: false, enterprise: true },
+  { name: "Dedicated Account Manager", founders: false, featured: true, enterprise: true },
 ];
 
 export default function PricingPage() {
@@ -119,7 +103,7 @@ export default function PricingPage() {
             your ambition
           </h1>
           <p className="text-white/50 mt-4 text-lg max-w-xl mx-auto leading-relaxed">
-            Free for verified CISOs. Transparent plans for founders and enterprise teams.
+            Transparent plans for founders and enterprise teams.
           </p>
         </div>
       </section>
@@ -127,7 +111,7 @@ export default function PricingPage() {
       {/* Pricing Cards */}
       <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {tiers.map((tier) => {
               const Icon = tier.icon;
               return (
@@ -247,8 +231,6 @@ export default function PricingPage() {
                     className={`group flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
                       tier.dark
                         ? "bg-[#0057FF] hover:bg-[#0057FF]/90 text-white shadow-lg shadow-[#0057FF]/20"
-                        : tier.name === "CISO"
-                        ? "bg-[#1E3A5F] hover:bg-[#1E3A5F]/90 text-white"
                         : tier.name === "Enterprise"
                         ? "border border-[#1E3A5F]/20 text-[#1E3A5F] hover:bg-[#1E3A5F]/5"
                         : "bg-[#0A0A0A] hover:bg-[#0A0A0A]/90 text-white"
@@ -294,10 +276,7 @@ export default function PricingPage() {
                     Feature
                   </th>
                   <th className="text-center py-4 px-4 font-medium text-white/60 text-[13px]">
-                    CISO
-                  </th>
-                  <th className="text-center py-4 px-4 font-medium text-white/60 text-[13px]">
-                    Founders
+                    Founders Edition
                   </th>
                   <th className="text-center py-4 px-4 font-semibold text-white text-[13px]">
                     Featured
@@ -320,7 +299,6 @@ export default function PricingPage() {
                     </td>
                     {(
                       [
-                        feature.ciso,
                         feature.founders,
                         feature.featured,
                         feature.enterprise,
