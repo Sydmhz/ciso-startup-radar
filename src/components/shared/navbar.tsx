@@ -7,9 +7,9 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { href: "/directory", label: "Directory" },
-  { href: "/cisos", label: "CISOs" },
-  { href: "/training", label: "Training" },
+  { href: "/directory", label: "Startup Directory" },
+  { href: "/cisos", label: "CISO Directory" },
+  { href: "/training", label: "CISO Trainings" },
   { href: "/venture-network", label: "Venture Network" },
   { href: "/pricing", label: "Pricing" },
 ];
@@ -34,26 +34,12 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm text-[#0A0A0A] hover:text-navy transition-colors"
-              >
-                {link.label}
-              </Link>
+              <Button key={link.href} asChild className="bg-navy hover:bg-navy/90 text-white text-sm">
+                <Link href={link.href}>{link.label}</Link>
+              </Button>
             ))}
-          </div>
-
-          {/* Desktop CTAs */}
-          <div className="hidden md:flex items-center gap-3">
-            <Button asChild className="bg-navy hover:bg-navy/90 text-white text-sm">
-              <Link href="/apply">Apply as CISO</Link>
-            </Button>
-            <Button asChild variant="outline" className="border-navy text-navy hover:bg-navy/5 text-sm">
-              <Link href="/directory">List Your Startup</Link>
-            </Button>
           </div>
 
           {/* Mobile toggle */}
@@ -71,23 +57,15 @@ export function Navbar() {
           <div className="md:hidden pb-4 border-t border-[#E5E7EB]">
             <div className="flex flex-col gap-2 pt-4">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="px-3 py-2 text-sm text-[#0A0A0A] hover:bg-gray-50 rounded-md"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
+                <Button key={link.href} asChild className="bg-navy hover:bg-navy/90 text-white text-sm w-full justify-start">
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </Button>
               ))}
-              <div className="flex flex-col gap-2 px-3 pt-2">
-                <Button asChild className="bg-navy hover:bg-navy/90 text-white text-sm w-full">
-                  <Link href="/apply">Apply as CISO</Link>
-                </Button>
-                <Button asChild variant="outline" className="border-navy text-navy text-sm w-full">
-                  <Link href="/directory">List Your Startup</Link>
-                </Button>
-              </div>
             </div>
           </div>
         )}

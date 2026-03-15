@@ -39,7 +39,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/training" className="text-sm text-gray-500 hover:text-navy">
-                  Training
+                  CISO Trainings
                 </Link>
               </li>
               <li>
