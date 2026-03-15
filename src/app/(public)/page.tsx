@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -65,6 +66,16 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-20 md:py-28" style={{ background: 'linear-gradient(180deg, #F8FAFC 0%, #EFF4F9 40%, #FFFFFF 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex justify-center mb-8">
+            <Image
+              src="/logo.png"
+              alt="CISO StartUp Radar"
+              width={320}
+              height={233}
+              className="h-20 md:h-24 w-auto object-contain"
+              priority
+            />
+          </div>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-navy leading-tight max-w-4xl mx-auto">
             The Intelligence Layer for CISOs Navigating the Cybersecurity
             Startup Ecosystem
