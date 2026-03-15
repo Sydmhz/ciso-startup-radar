@@ -16,7 +16,7 @@ import {
   TrendingUp,
   Lock,
 } from "lucide-react";
-import type { Startup } from "@/lib/types";
+import type { Startup, FounderProfile } from "@/lib/types";
 import allStartups from "@/lib/data/startups.json";
 
 const startups = allStartups as Startup[];
@@ -133,10 +133,12 @@ function DetailPanel({
   const panelRef = useRef<HTMLDivElement>(null);
   const score = getGrowthScore(startup);
   const domain = domainFromUrl(startup.website);
-  const founders = startup.founders_all
-    ? startup.founders_all.split(",").map((f) => f.trim())
+  const founderProfiles: FounderProfile[] = startup.founder_profiles && startup.founder_profiles.length > 0
+    ? startup.founder_profiles
+    : startup.founders_all
+    ? startup.founders_all.split(",").map((f) => ({ name: f.trim() }))
     : startup.founder_name
-    ? [startup.founder_name]
+    ? [{ name: startup.founder_name, linkedin_url: startup.founder_linkedin || undefined }]
     : [];
 
   useEffect(() => {
@@ -270,23 +272,23 @@ function DetailPanel({
           )}
 
           {/* Founders */}
-          {founders.length > 0 && (
+          {founderProfiles.length > 0 && (
             <div>
               <span className="text-[10px] font-medium uppercase tracking-wider text-[#0A0A0A]/40">
                 Founders
               </span>
               <div className="mt-2 space-y-1.5">
-                {founders.map((f, i) => (
+                {founderProfiles.map((fp, i) => (
                   <div
                     key={i}
                     className="flex items-center justify-between bg-gray-50 rounded-lg px-4 py-2.5"
                   >
                     <span className="text-sm font-medium text-[#0A0A0A]">
-                      {f}
+                      {fp.name}
                     </span>
-                    {i === 0 && startup.founder_linkedin && (
+                    {fp.linkedin_url && (
                       <a
-                        href={startup.founder_linkedin}
+                        href={fp.linkedin_url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[#0A66C2] hover:opacity-80"

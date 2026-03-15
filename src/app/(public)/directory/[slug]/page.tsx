@@ -13,7 +13,7 @@ import {
   Building2,
   Shield,
 } from "lucide-react";
-import type { Startup } from "@/lib/types";
+import type { Startup, FounderProfile } from "@/lib/types";
 import allStartups from "@/lib/data/startups.json";
 
 const startups = allStartups as Startup[];
@@ -189,44 +189,44 @@ export default function StartupDetailPage({
           )}
         </div>
 
-        {/* Founder */}
-        {startup.founder_name && (
+        {/* Founders */}
+        {((startup.founder_profiles && startup.founder_profiles.length > 0) || startup.founder_name) && (
           <div className="mb-10">
             <h2 className="text-lg font-medium text-[#0A0A0A] mb-3">
-              {startup.founders_all ? "Founders" : "Founder"}
+              {(startup.founder_profiles?.length || 0) > 1 || startup.founders_all?.includes(",") ? "Founders" : "Founder"}
             </h2>
-            <Card className="bg-gray-50 border-0">
-              <CardContent className="py-1">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center text-navy font-medium text-sm">
-                      {startup.founder_name
-                        .split(" ")
-                        .map((w) => w[0])
-                        .join("")}
+            <div className="space-y-2">
+              {(startup.founder_profiles && startup.founder_profiles.length > 0
+                ? startup.founder_profiles
+                : [{ name: startup.founder_name || "", linkedin_url: startup.founder_linkedin || undefined } as FounderProfile]
+              ).map((fp, i) => (
+                <Card key={i} className="bg-gray-50 border-0">
+                  <CardContent className="py-1">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center text-navy font-medium text-sm">
+                          {fp.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
+                        </div>
+                        <div>
+                          <p className="font-medium text-[#0A0A0A]">{fp.name}</p>
+                          <p className="text-sm text-[#0A0A0A]/50">Founder</p>
+                        </div>
+                      </div>
+                      {fp.linkedin_url && (
+                        <a
+                          href={fp.linkedin_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-cta hover:text-blue-cta/80"
+                        >
+                          <Linkedin className="h-5 w-5" />
+                        </a>
+                      )}
                     </div>
-                    <div>
-                      <p className="font-medium text-[#0A0A0A]">
-                        {startup.founders_all || startup.founder_name}
-                      </p>
-                      <p className="text-sm text-[#0A0A0A]/50">
-                        {startup.founders_all ? "Co-Founders" : "Founder"}
-                      </p>
-                    </div>
-                  </div>
-                  {startup.founder_linkedin && (
-                    <a
-                      href={startup.founder_linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-cta hover:text-blue-cta/80"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                    </a>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         )}
 

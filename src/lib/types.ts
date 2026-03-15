@@ -23,6 +23,11 @@ export interface CisoApplication {
   reviewed_at: string | null;
 }
 
+export interface FounderProfile {
+  name: string;
+  linkedin_url?: string;
+}
+
 export interface Startup {
   id: string;
   name: string;
@@ -34,8 +39,9 @@ export interface Startup {
   founding_year: number | null;
   hq: string | null;
   website: string | null;
-  founder_name: string | null;
-  founder_linkedin: string | null;
+  founder_name?: string | null;
+  founder_linkedin?: string | null;
+  founder_profiles?: FounderProfile[];
   founders_all?: string | null;
   linkedin_url?: string | null;
   vc_backers: string[] | null;
