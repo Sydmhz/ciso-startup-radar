@@ -489,7 +489,8 @@ export default function DirectoryPage() {
                   <div
                     key={startup.id}
                     onClick={() => setSelectedStartup(startup)}
-                    className="group relative bg-white border border-[#E5E7EB] rounded-xl p-5 cursor-pointer transition-all duration-200 hover:shadow-lg hover:border-[#E5E7EB]/60"
+                    className="group relative border border-[#E5E7EB] rounded-xl p-5 cursor-pointer transition-all duration-200 hover:shadow-lg hover:border-[#E5E7EB]/60"
+                    style={{ background: "linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)" }}
                   >
                     {/* Top row: logo + name + score */}
                     <div className="flex items-start justify-between gap-3">
