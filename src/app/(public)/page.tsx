@@ -22,16 +22,34 @@ const pillars = [
     icon: ShieldAlert,
     label: "The Challenge",
     body: "The cybersecurity market is expanding rapidly, with thousands of startups across dozens of security categories. For CISOs, identifying meaningful innovation has become increasingly difficult.",
+    gradient: "linear-gradient(145deg, #0A0F1C 0%, #1E3A5F 100%)",
+    iconBg: "bg-white/10",
+    iconColor: "text-[#60A5FA]",
+    titleColor: "text-white",
+    bodyColor: "text-white/60",
+    border: "border-white/10",
   },
   {
     icon: Lightbulb,
     label: "The Opportunity",
     body: "Security leaders who understand emerging vendors early gain strategic advantage \u2014 in partnerships, technology adoption, and investment.",
+    gradient: "linear-gradient(145deg, #1E3A5F 0%, #264B73 50%, #1E3A5F 100%)",
+    iconBg: "bg-white/10",
+    iconColor: "text-[#93C5FD]",
+    titleColor: "text-white",
+    bodyColor: "text-white/60",
+    border: "border-white/10",
   },
   {
     icon: Layers,
     label: "The Platform",
     body: "CISOStartupRadar provides a curated intelligence platform for CISOs to track emerging cybersecurity startups and explore the evolving security ecosystem.",
+    gradient: "linear-gradient(145deg, #0057FF 0%, #1E3A5F 100%)",
+    iconBg: "bg-white/15",
+    iconColor: "text-white",
+    titleColor: "text-white",
+    bodyColor: "text-white/60",
+    border: "border-white/10",
   },
 ];
 
@@ -146,16 +164,16 @@ export default function HomePage() {
               return (
                 <div
                   key={i}
-                  className="relative rounded-2xl p-8 border border-[#E5E7EB] hover:shadow-lg transition-all duration-300"
-                  style={{ background: 'linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)' }}
+                  className={`relative rounded-2xl p-8 border ${pillar.border} hover:shadow-xl transition-all duration-300`}
+                  style={{ background: pillar.gradient }}
                 >
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[#1E3A5F]/5 mb-5">
-                    <Icon className="h-5 w-5 text-[#1E3A5F]" />
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${pillar.iconBg} mb-5`}>
+                    <Icon className={`h-5 w-5 ${pillar.iconColor}`} />
                   </div>
-                  <h3 className="text-base font-bold text-[#0A0A0A] mb-3">
+                  <h3 className={`text-base font-bold ${pillar.titleColor} mb-3`}>
                     {pillar.label}
                   </h3>
-                  <p className="text-sm text-[#0A0A0A]/60 leading-relaxed">
+                  <p className={`text-sm ${pillar.bodyColor} leading-relaxed`}>
                     {pillar.body}
                   </p>
                 </div>
