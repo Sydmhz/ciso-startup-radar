@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -7,10 +8,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="font-serif text-xl text-navy">
-              CISOStartupRadar
+            <Link href="/" className="inline-block">
+              <Image
+                src="/logo.png"
+                alt="CISO StartUp Radar"
+                width={160}
+                height={116}
+                className="h-10 w-auto object-contain"
+              />
             </Link>
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-3 text-sm text-gray-500">
               The CISO Directory to Explore, Invest and Partner with the Right
               Cybersecurity Startups.
             </p>
@@ -79,23 +86,13 @@ export function Footer() {
                   Terms of Service
                 </Link>
               </li>
-              <li>
-                <a
-                  href="https://www.perplexity.ai/computer"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-gray-500 hover:text-navy"
-                >
-                  Created with Perplexity Computer
-                </a>
-              </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-[#E5E7EB]">
           <p className="text-center text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} CISOStartupRadar. All rights reserved.
+            &copy; {new Date().getFullYear()} CISO StartUp Radar. All rights reserved.
           </p>
         </div>
       </div>
