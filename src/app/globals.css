@@ -1,0 +1,56 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 213 52% 24%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 0 0% 4%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 84% 60%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 216 100% 50%;
+    --radius: 0.5rem;
+    --sidebar: 0 0% 97%;
+    --sidebar-foreground: 0 0% 4%;
+    --sidebar-primary: 213 52% 24%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 0 0% 4%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 216 100% 50%;
+    --chart-1: 216 100% 50%;
+    --chart-2: 213 52% 24%;
+    --chart-3: 220 9% 46%;
+    --chart-4: 0 84% 60%;
+    --chart-5: 142 76% 36%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-white text-[#0A0A0A] font-sans antialiased;
+  }
+}
