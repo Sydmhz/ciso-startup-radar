@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { JsonLd } from "@/components/shared/json-ld";
-import { Quote, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ShieldAlert, Lightbulb, Layers } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "CISOStartupRadar - The Intelligence Layer for CISOs",
@@ -18,27 +17,21 @@ const metrics = [
   { value: "$4.2B", label: "Cybersecurity Venture Funding Tracked", delta: "+22%", period: "YoY" },
 ];
 
-const testimonials = [
+const pillars = [
   {
-    quote:
-      "CISOStartupRadar has transformed how I discover emerging cybersecurity vendors. The curated intelligence saves me hours of research every week.",
-    name: "Sarah Chen",
-    title: "CISO",
-    company: "Meridian Financial Group",
+    icon: ShieldAlert,
+    label: "The Challenge",
+    body: "The cybersecurity market is expanding rapidly, with thousands of startups across dozens of security categories. For CISOs, identifying meaningful innovation has become increasingly difficult.",
   },
   {
-    quote:
-      "As a founder, getting visibility with enterprise CISOs is everything. This platform connected us with three Fortune 500 security leaders in our first month.",
-    name: "Marcus Rivera",
-    title: "CEO & Co-Founder",
-    company: "VaultShield Security",
+    icon: Lightbulb,
+    label: "The Opportunity",
+    body: "Security leaders who understand emerging vendors early gain strategic advantage \u2014 in partnerships, technology adoption, and investment.",
   },
   {
-    quote:
-      "The venture network feature alone is worth it. I sourced two board advisory positions and connected with pre-Series A startups aligned with our security roadmap.",
-    name: "David Park",
-    title: "VP of Information Security",
-    company: "Atlas Healthcare Systems",
+    icon: Layers,
+    label: "The Platform",
+    body: "CISOStartupRadar provides a curated intelligence platform for CISOs to track emerging cybersecurity startups and explore the evolving security ecosystem.",
   },
 ];
 
@@ -131,31 +124,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-serif text-3xl text-navy text-center mb-12">
-            Trusted by Security Leaders
-          </h2>
+      {/* Ecosystem Section */}
+      <section className="py-20 md:py-28" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section header */}
+          <div className="text-center mb-16">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#0A0A0A]/30 mb-3">
+              Why CISOStartupRadar
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-[#0A0A0A] leading-tight">
+              Navigating the Cybersecurity
+              <br className="hidden sm:block" />
+              Startup Ecosystem
+            </h2>
+          </div>
+
+          {/* Pillars */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, i) => (
-              <Card key={i} className="bg-white border-0 shadow-sm">
-                <CardContent className="pt-2">
-                  <Quote className="h-8 w-8 text-navy/20 mb-4" />
-                  <p className="text-[#0A0A0A]/80 leading-relaxed mb-6 italic">
-                    &ldquo;{testimonial.quote}&rdquo;
-                  </p>
-                  <div>
-                    <p className="font-medium text-[#0A0A0A]">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-sm text-[#0A0A0A]/60">
-                      {testimonial.title}, {testimonial.company}
-                    </p>
+            {pillars.map((pillar, i) => {
+              const Icon = pillar.icon;
+              return (
+                <div
+                  key={i}
+                  className="relative rounded-2xl p-8 border border-[#E5E7EB] hover:shadow-lg transition-all duration-300"
+                  style={{ background: 'linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)' }}
+                >
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[#1E3A5F]/5 mb-5">
+                    <Icon className="h-5 w-5 text-[#1E3A5F]" />
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <h3 className="text-base font-bold text-[#0A0A0A] mb-3">
+                    {pillar.label}
+                  </h3>
+                  <p className="text-sm text-[#0A0A0A]/60 leading-relaxed">
+                    {pillar.body}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
