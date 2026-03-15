@@ -63,7 +63,7 @@ export default function HomePage() {
       />
 
       {/* Hero Section */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="py-20 md:py-28" style={{ background: 'linear-gradient(180deg, #F8FAFC 0%, #EFF4F9 40%, #FFFFFF 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-navy leading-tight max-w-4xl mx-auto">
             The Intelligence Layer for CISOs Navigating the Cybersecurity
