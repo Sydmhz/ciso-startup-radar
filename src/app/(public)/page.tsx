@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { JsonLd } from "@/components/shared/json-ld";
-import { Shield, Rocket, Building2, Quote } from "lucide-react";
+import { Quote, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "CISOStartupRadar - The Intelligence Layer for CISOs",
@@ -11,31 +11,11 @@ export const metadata: Metadata = {
     "Verified CISO directory. Curated startup intelligence. Real deal flow. The intelligence layer for CISOs navigating the cybersecurity startup ecosystem.",
 };
 
-const features = [
-  {
-    icon: Shield,
-    title: "For CISOs",
-    description:
-      "Access verified peer directory, training resources, and exclusive deal flow",
-  },
-  {
-    icon: Rocket,
-    title: "For Founders",
-    description:
-      "Get your cybersecurity startup in front of the right CISOs and investors",
-  },
-  {
-    icon: Building2,
-    title: "For Enterprise Teams",
-    description:
-      "Find vetted cybersecurity startups and access board-ready CISO talent",
-  },
-];
-
-const stats = [
-  { value: "551", label: "Startups Tracked" },
-  { value: "290+", label: "Verified CISOs" },
-  { value: "Updated", label: "Monthly" },
+const metrics = [
+  { value: "551", label: "Startups Tracked", delta: "+12%", period: "QoQ" },
+  { value: "290+", label: "Verified CISOs", delta: "+8%", period: "QoQ" },
+  { value: "$4.2B", label: "Total Funding Mapped", delta: "+22%", period: "YoY" },
+  { value: "16", label: "Training Programs", delta: "Curated", period: "" },
 ];
 
 const testimonials = [
@@ -104,41 +84,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Feature Blocks */}
-      <section className="bg-gray-50 py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature) => (
-              <Card key={feature.title} className="bg-white border-0 shadow-sm">
-                <CardContent className="pt-2">
-                  <div className="w-12 h-12 rounded-lg bg-navy/10 flex items-center justify-center mb-4">
-                    <feature.icon className="h-6 w-6 text-navy" />
-                  </div>
-                  <h3 className="font-serif text-xl text-navy mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-[#0A0A0A]/70 leading-relaxed">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+      {/* Market Overview — Bloomberg Style */}
+      <section className="bg-white border-y border-[#E5E7EB]">
+        <div className="max-w-7xl mx-auto">
+          {/* Section header */}
+          <div className="px-4 sm:px-6 lg:px-8 py-4 border-b border-[#E5E7EB]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-1 h-5 bg-[#0057FF] rounded-full" />
+                <span className="text-xs font-semibold tracking-widest uppercase text-[#0A0A0A]/50">Market Overview</span>
+              </div>
+              <span className="text-xs text-[#0A0A0A]/40">Updated Mar 2026</span>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Stats Bar */}
-      <section className="bg-white py-12 border-y border-[#E5E7EB]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <span className="block text-3xl font-bold text-navy">
-                  {stat.value}
-                </span>
-                <span className="text-sm text-navy/70 mt-1">
-                  {stat.label}
-                </span>
+          {/* Metrics grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {metrics.map((metric, i) => (
+              <div
+                key={i}
+                className={`px-4 sm:px-6 lg:px-8 py-8 ${
+                  i < metrics.length - 1 ? "border-r border-[#E5E7EB]" : ""
+                } ${i < 2 ? "border-b md:border-b-0 border-[#E5E7EB]" : ""}`}
+              >
+                <p className="text-xs font-medium tracking-wide uppercase text-[#0A0A0A]/40 mb-3">
+                  {metric.label}
+                </p>
+                <p className="text-3xl md:text-4xl font-semibold text-[#0A0A0A] tracking-tight leading-none">
+                  {metric.value}
+                </p>
+                <div className="mt-2 flex items-center gap-1.5">
+                  {metric.period && (
+                    <>
+                      <ArrowUpRight className="h-3 w-3 text-emerald-600" />
+                      <span className="text-xs font-medium text-emerald-600">{metric.delta}</span>
+                      <span className="text-xs text-[#0A0A0A]/30">{metric.period}</span>
+                    </>
+                  )}
+                  {!metric.period && (
+                    <span className="text-xs font-medium text-[#0057FF]">{metric.delta}</span>
+                  )}
+                </div>
               </div>
             ))}
           </div>
