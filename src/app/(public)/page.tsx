@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 };
 
 const metrics = [
-  { value: "551", label: "Startups Tracked", delta: "+12%", period: "QoQ" },
-  { value: "290+", label: "Verified CISOs", delta: "+8%", period: "QoQ" },
-  { value: "$4.2B", label: "Total Funding Mapped", delta: "+22%", period: "YoY" },
-  { value: "16", label: "Training Programs", delta: "Curated", period: "" },
+  { value: "500+", label: "Cybersecurity Startups Tracked", delta: "+12%", period: "QoQ" },
+  { value: "290+", label: "Verified CISOs in Network", delta: "+8%", period: "QoQ" },
+  { value: "150+", label: "CISOs Exploring New Startups", delta: "+18%", period: "MoM" },
+  { value: "$4.2B", label: "Cybersecurity Venture Funding Tracked", delta: "+22%", period: "YoY" },
 ];
 
 const testimonials = [
