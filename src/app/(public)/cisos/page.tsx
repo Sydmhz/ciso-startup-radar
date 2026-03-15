@@ -20,12 +20,9 @@ function cleanCompany(raw: string): string {
   return raw.replace(/\s*\(.*?\)\s*$/, "").trim();
 }
 
-/* helper: get company favicon from clearbit */
+/* helper: get company logo from Google Favicon API */
 function companyLogoUrl(company: string): string {
-  const slug = cleanCompany(company)
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "")
-    .replace(/\s+/g, "");
+  const name = cleanCompany(company).toLowerCase().replace(/[^a-z0-9]/g, "");
   // Map well-known companies to their domains
   const domainMap: Record<string, string> = {
     apple: "apple.com", google: "google.com", meta: "meta.com", amazon: "amazon.com",
@@ -66,10 +63,59 @@ function companyLogoUrl(company: string): string {
     mondelezinternational: "mondelezinternational.com", mondelez: "mondelezinternational.com",
     livenation: "livenationentertainment.com", livenationentertainment: "livenationentertainment.com",
     bakerhughes: "bakerhughes.com", centene: "centene.com", corteva: "corteva.com",
-    tjx: "tjx.com",
+    tjx: "tjx.com", tdsynnex: "tdsynnex.com", colgatepalmolive: "colgatepalmolive.com",
+    colgate: "colgatepalmolive.com", ge: "ge.com", generalelectric: "ge.com",
+    honeywell: "honeywell.com", "3m": "3m.com", caterpillar: "caterpillar.com",
+    deere: "deere.com", johndeere: "deere.com",
+    americanairlines: "aa.com", unitedairlines: "united.com",
+    southwestairlines: "southwest.com", southwest: "southwest.com",
+    starbucks: "starbucks.com", mcdonalds: "mcdonalds.com",
+    phillips66: "phillips66.com", marathon: "marathonpetroleum.com",
+    conocophillips: "conocophillips.com", valero: "valero.com",
+    humana: "humana.com", anthem: "anthem.com", elevance: "elevancehealth.com",
+    elevancehealth: "elevancehealth.com", cigna: "cigna.com",
+    prudential: "prudential.com", metlife: "metlife.com",
+    charlesschwab: "schwab.com", schwab: "schwab.com",
+    fidelity: "fidelity.com", blackrock: "blackrock.com",
+    statestreet: "statestreet.com", bnymellon: "bnymellon.com",
+    usbank: "usbank.com", pnc: "pnc.com", truist: "truist.com",
+    capitalone: "capitalone.com", discover: "discover.com",
+    oldrepublic: "oldrepublictitle.com", oldrepublictitle: "oldrepublictitle.com",
+    wps: "wps.com",
+    cargill: "cargill.com", adm: "adm.com",
+    hershey: "hersheys.com", hersheys: "hersheys.com",
+    kraft: "kraftheinzcompany.com", kraftheinz: "kraftheinzcompany.com",
+    generalmills: "generalmills.com", kellogg: "kelloggs.com",
+    tyson: "tysonfoods.com", tysonfoods: "tysonfoods.com",
+    lockheed: "lockheedmartin.com",
+    northrop: "northropgrumman.com",
+    lm: "lockheedmartin.com",
+    raytheontech: "rtx.com",
+    baesystems: "baesystems.com", bae: "baesystems.com",
+    leidos: "leidos.com", saic: "saic.com", booz: "boozallen.com",
+    boozallen: "boozallen.com", boozallenhamilton: "boozallen.com",
+    zoom: "zoom.us", slack: "slack.com", dropbox: "dropbox.com",
+    snowflake: "snowflake.com", crowdstrike: "crowdstrike.com",
+    paloalto: "paloaltonetworks.com", paloaltonetworks: "paloaltonetworks.com",
+    fortinet: "fortinet.com", zscaler: "zscaler.com",
+    splunk: "splunk.com", datadog: "datadoghq.com",
+    servicenow: "servicenow.com", workday: "workday.com",
+    twilio: "twilio.com", okta: "okta.com",
+    crowdstrike: "crowdstrike.com",
+    symantec: "broadcom.com", broadcom: "broadcom.com",
+    vmware: "vmware.com", dell: "dell.com",
+    hp: "hp.com", hpe: "hpe.com", hewlettpackard: "hpe.com",
+    lenovo: "lenovo.com", samsung: "samsung.com",
+    qualcomm: "qualcomm.com", amd: "amd.com", nvidia: "nvidia.com",
+    micron: "micron.com", texasinstruments: "ti.com",
   };
-  const domain = domainMap[slug] || `${slug}.com`;
-  return `https://logo.clearbit.com/${domain}?size=40`;
+  const domain = domainMap[name] || `${cleanCompany(company).toLowerCase().replace(/\s+/g, "")}.com`;
+  return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+}
+
+/* helper: generate DiceBear avatar URL for nice initials */
+function avatarUrl(name: string): string {
+  return `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=1e3a5f&textColor=ffffff&fontSize=40&fontFamily=Arial&fontWeight=600`;
 }
 
 type SortField = "name" | "company";
@@ -233,32 +279,14 @@ export default function CisosPage() {
                   >
                     {/* Name + Photo */}
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-9 h-9 rounded-full bg-[#1E3A5F]/10 flex items-center justify-center text-[#1E3A5F] font-bold text-xs shrink-0 overflow-hidden">
-                        {ciso.linkedin_url ? (
-                          <img
-                            src={`https://unavatar.io/linkedin/${ciso.linkedin_url.split("/in/")[1]?.replace(/\/$/, "")}`}
-                            alt={ciso.name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              const target = e.currentTarget;
-                              target.style.display = "none";
-                              const parent = target.parentElement;
-                              if (parent) {
-                                parent.textContent = ciso.name
-                                  .split(" ")
-                                  .map((n) => n[0])
-                                  .join("")
-                                  .slice(0, 2);
-                              }
-                            }}
-                          />
-                        ) : (
-                          ciso.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")
-                            .slice(0, 2)
-                        )}
+                      <div className="w-9 h-9 rounded-full shrink-0 overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={avatarUrl(ciso.name)}
+                          alt={ciso.name}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
                       </div>
                       <span className="text-sm font-semibold text-[#0A0A0A] truncate">
                         {ciso.name}
@@ -267,6 +295,7 @@ export default function CisosPage() {
 
                     {/* Current Company */}
                     <div className="flex items-center gap-2.5 min-w-0">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={companyLogoUrl(ciso.company || "")}
                         alt=""
@@ -274,6 +303,7 @@ export default function CisosPage() {
                         onError={(e) => {
                           (e.currentTarget as HTMLImageElement).style.display = "none";
                         }}
+                        loading="lazy"
                       />
                       <span className="text-sm text-[#0A0A0A]/70 truncate">
                         {ciso.company}
