@@ -89,25 +89,16 @@ export default function HomePage() {
             The Intelligence Layer for CISOs Navigating the Cybersecurity
             Startup Ecosystem
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-[#0A0A0A]/70 max-w-2xl mx-auto">
-            Verified CISO directory. Curated startup intelligence. Real deal
-            flow.
+          <p className="mt-6 text-lg md:text-xl text-[#0A0A0A]/70 max-w-3xl mx-auto">
+            Discover verified cybersecurity startups, connect with founders, explore CISO training programs, and access curated market intelligence built for security leaders.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-10 flex items-center justify-center">
             <Button
               asChild
               size="lg"
               className="bg-navy hover:bg-navy/90 text-white px-8 py-3 text-base h-12"
             >
-              <Link href="/apply">Apply as a CISO &mdash; It&apos;s Free</Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-navy text-navy hover:bg-navy/5 px-8 py-3 text-base h-12"
-            >
-              <Link href="/directory">Explore the Startup Directory</Link>
+              <Link href="/apply">Apply for CISO Access</Link>
             </Button>
           </div>
         </div>
