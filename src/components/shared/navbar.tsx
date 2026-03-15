@@ -29,7 +29,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/logo-white.png"
+              src="/logo-nav.png"
               alt="CISO StartUp Radar"
               width={240}
               height={174}
