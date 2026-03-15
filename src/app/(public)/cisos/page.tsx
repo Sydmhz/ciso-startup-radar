@@ -101,7 +101,6 @@ function companyLogoUrl(company: string): string {
     splunk: "splunk.com", datadog: "datadoghq.com",
     servicenow: "servicenow.com", workday: "workday.com",
     twilio: "twilio.com", okta: "okta.com",
-    crowdstrike: "crowdstrike.com",
     symantec: "broadcom.com", broadcom: "broadcom.com",
     vmware: "vmware.com", dell: "dell.com",
     hp: "hp.com", hpe: "hpe.com", hewlettpackard: "hpe.com",
