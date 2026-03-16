@@ -81,7 +81,7 @@ export default function HomePage() {
             Startup Ecosystem
           </h1>
           <p className="mt-6 text-lg md:text-xl text-[#0A0A0A]/70 max-w-3xl mx-auto">
-            Discover verified cybersecurity startups, connect with founders, explore CISO training programs, and access curated market intelligence built for security leaders.
+            A curated, private network where CISOs discover emerging cybersecurity startups and engage directly with founders through partnerships, advisory roles, and investment opportunities.
           </p>
           <div className="mt-10 flex items-center justify-center">
             <Button
