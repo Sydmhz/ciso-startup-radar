@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ArrowUpRight, ShieldAlert, Lightbulb, Layers } from "lucide-react";
 import { LogoMarquee } from "@/components/shared/logo-marquee";
+import { PortfolioShowcase } from "@/components/shared/portfolio-showcase";
 
 export const metadata: Metadata = {
   title: "CISOStartupRadar - The Intelligence Layer for CISOs",
@@ -200,6 +201,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Portfolio Showcase — Cyberstarts-style carousel */}
+      <PortfolioShowcase />
     </>
   );
 }
