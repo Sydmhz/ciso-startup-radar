@@ -95,21 +95,32 @@ export function PortfolioShowcase() {
   const progress = ((current + 1) / companies.length) * 100;
 
   return (
-    <section className="bg-[#F5F2EA]">
+    <section
+      style={{
+        background: "linear-gradient(135deg, #0A0F1C 0%, #111827 50%, #0A0F1C 100%)",
+      }}
+    >
       <div className="max-w-[1400px] mx-auto">
         <div className="flex flex-col md:flex-row min-h-[520px] lg:min-h-[600px]">
           {/* Left panel — headline text */}
           <div className="md:w-[38%] flex items-center px-8 md:px-12 lg:px-16 py-12 md:py-0">
-            <h2
-              className="text-3xl md:text-4xl lg:text-[44px] leading-[1.15] tracking-tight"
-              style={{
-                color: "#3D3A2A",
-                fontFamily: "'Instrument Serif', 'Georgia', serif",
-              }}
-            >
-              The cybersecurity startups defining the next generation of
-              security.
-            </h2>
+            <div>
+              <h2
+                className="text-3xl md:text-4xl lg:text-[44px] leading-[1.15] tracking-tight text-white"
+                style={{
+                  fontFamily: "'Instrument Serif', 'Georgia', serif",
+                }}
+              >
+                The cybersecurity startups defining the next generation of
+                security.
+              </h2>
+              <div className="mt-6 flex items-center gap-3">
+                <div className="w-8 h-[2px] bg-[#0057FF]" />
+                <span className="text-[12px] font-medium uppercase tracking-[0.15em] text-white/30">
+                  Featured Portfolio
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Right panel — carousel */}
@@ -164,7 +175,7 @@ export function PortfolioShowcase() {
                     className="h-full transition-all duration-500"
                     style={{
                       width: `${progress}%`,
-                      background: company.accent,
+                      background: "#0057FF",
                     }}
                   />
                 </div>
