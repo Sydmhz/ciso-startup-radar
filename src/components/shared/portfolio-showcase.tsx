@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const companies = [
@@ -10,7 +11,7 @@ const companies = [
     founders: "Yotam Segev, Tamar Bar-Ilan",
     funding: "$1.7B+",
     sector: "Data Security",
-    gradient: "linear-gradient(135deg, #0A1628 0%, #1E3A5F 40%, #0A2540 100%)",
+    image: "/founders/cyera.jpg",
     accent: "#3B82F6",
   },
   {
@@ -19,7 +20,7 @@ const companies = [
     founders: "Dan Lorenc, Matt Moore, Kim Lewandowski",
     funding: "$892M",
     sector: "Supply Chain Security",
-    gradient: "linear-gradient(135deg, #0F172A 0%, #1E293B 40%, #0C4A6E 100%)",
+    image: "/founders/chainguard.jpg",
     accent: "#06B6D4",
   },
   {
@@ -28,7 +29,7 @@ const companies = [
     founders: "Ilyas Khan, Honeywell Quantum Solutions",
     funding: "$1.4B+",
     sector: "Quantum Security",
-    gradient: "linear-gradient(135deg, #1A0A2E 0%, #2D1B69 40%, #1E1B4B 100%)",
+    image: "/founders/quantinuum.jpg",
     accent: "#8B5CF6",
   },
   {
@@ -37,7 +38,7 @@ const companies = [
     founders: "Jonathan Cogley, Tom Kemp",
     funding: "$1.4B+",
     sector: "Identity Security",
-    gradient: "linear-gradient(135deg, #0A1628 0%, #164E63 40%, #0E3A5C 100%)",
+    image: "/founders/delinea.jpg",
     accent: "#14B8A6",
   },
   {
@@ -46,7 +47,7 @@ const companies = [
     founders: "Jack Hidary",
     funding: "$950M+",
     sector: "Quantum Security",
-    gradient: "linear-gradient(135deg, #0C0A1D 0%, #1E1B4B 40%, #312E81 100%)",
+    image: "/founders/sandboxaq.jpg",
     accent: "#6366F1",
   },
   {
@@ -55,7 +56,7 @@ const companies = [
     founders: "Brian Long, Andrew Jones",
     funding: "$146.5M",
     sector: "Security Awareness",
-    gradient: "linear-gradient(135deg, #0F172A 0%, #1E3A5F 40%, #0A2540 100%)",
+    image: "/founders/adaptive.jpg",
     accent: "#0EA5E9",
   },
 ];
@@ -71,7 +72,7 @@ export function PortfolioShowcase() {
       setTimeout(() => {
         setCurrent(index);
         setIsTransitioning(false);
-      }, 300);
+      }, 400);
     },
     [isTransitioning]
   );
@@ -103,8 +104,7 @@ export function PortfolioShowcase() {
               className="text-3xl md:text-4xl lg:text-[44px] leading-[1.15] tracking-tight"
               style={{
                 color: "#3D3A2A",
-                fontFamily:
-                  "'Instrument Serif', 'Georgia', serif",
+                fontFamily: "'Instrument Serif', 'Georgia', serif",
               }}
             >
               The cybersecurity startups defining the next generation of
@@ -113,81 +113,51 @@ export function PortfolioShowcase() {
           </div>
 
           {/* Right panel — carousel */}
-          <div className="md:w-[62%] relative overflow-hidden">
-            {/* Card */}
+          <div className="md:w-[62%] relative overflow-hidden bg-black">
+            {/* Image card */}
             <div
-              className={`relative w-full h-full min-h-[400px] md:min-h-[520px] lg:min-h-[600px] transition-opacity duration-300 ${
+              className={`relative w-full h-full min-h-[400px] md:min-h-[520px] lg:min-h-[600px] transition-opacity duration-400 ${
                 isTransitioning ? "opacity-0" : "opacity-100"
               }`}
-              style={{ background: company.gradient }}
             >
-              {/* Abstract visual pattern */}
-              <div className="absolute inset-0 overflow-hidden">
-                {/* Grid lines */}
-                <div
-                  className="absolute inset-0 opacity-[0.04]"
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(${company.accent}40 1px, transparent 1px),
-                      linear-gradient(90deg, ${company.accent}40 1px, transparent 1px)
-                    `,
-                    backgroundSize: "60px 60px",
-                  }}
-                />
-                {/* Large accent circle */}
-                <div
-                  className="absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full opacity-[0.08]"
-                  style={{
-                    background: `radial-gradient(circle, ${company.accent} 0%, transparent 70%)`,
-                  }}
-                />
-                {/* Second accent glow */}
-                <div
-                  className="absolute -left-10 bottom-[30%] w-[300px] h-[300px] rounded-full opacity-[0.06]"
-                  style={{
-                    background: `radial-gradient(circle, ${company.accent} 0%, transparent 70%)`,
-                  }}
-                />
-                {/* Company initial — large watermark */}
-                <div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[220px] md:text-[280px] font-bold leading-none select-none pointer-events-none opacity-[0.04]"
-                  style={{ color: company.accent }}
-                >
-                  {company.name.charAt(0)}
-                </div>
-                {/* Sector label */}
-                <div className="absolute top-6 right-6">
-                  <span
-                    className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] rounded-full border"
-                    style={{
-                      color: `${company.accent}`,
-                      borderColor: `${company.accent}40`,
-                      background: `${company.accent}15`,
-                    }}
-                  >
-                    {company.sector}
-                  </span>
-                </div>
-              </div>
+              {/* Founder image */}
+              <Image
+                src={company.image}
+                alt={`${company.name} founders`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 62vw"
+                priority={current === 0}
+                unoptimized
+              />
+
+              {/* Dark overlay for bottom readability */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 0%, transparent 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.6) 85%, rgba(0,0,0,0.85) 100%)",
+                }}
+              />
 
               {/* Navigation arrows */}
               <button
                 onClick={prev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-black/40 transition-all"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/50 transition-all"
                 aria-label="Previous company"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={next}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-black/40 transition-all"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white hover:bg-black/50 transition-all"
                 aria-label="Next company"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
 
               {/* Bottom overlay — company info */}
-              <div className="absolute bottom-0 left-0 right-0">
+              <div className="absolute bottom-0 left-0 right-0 z-10">
                 {/* Progress bar */}
                 <div className="h-[3px] bg-white/10">
                   <div
