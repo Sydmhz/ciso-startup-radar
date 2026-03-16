@@ -30,17 +30,17 @@ const companies = [
 
 function LogoItem({ name, domain }: { name: string; domain: string }) {
   return (
-    <div className="flex-shrink-0 flex items-center gap-2.5 mx-8">
+    <div className="flex-shrink-0 flex items-center gap-3 mx-10">
       <Image
         src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
         alt={name}
-        width={24}
-        height={24}
-        className="h-6 w-6 object-contain"
+        width={28}
+        height={28}
+        className="h-7 w-7 object-contain"
         style={{ filter: "grayscale(100%) brightness(0)" }}
         unoptimized
       />
-      <span className="text-black font-semibold text-sm tracking-tight whitespace-nowrap">
+      <span className="text-black font-bold text-sm tracking-tight whitespace-nowrap">
         {name}
       </span>
     </div>
@@ -49,10 +49,10 @@ function LogoItem({ name, domain }: { name: string; domain: string }) {
 
 export function LogoMarquee() {
   return (
-    <div className="w-screen relative left-1/2 -translate-x-1/2 overflow-hidden mt-16">
+    <div className="w-screen relative left-1/2 -translate-x-1/2 overflow-hidden mt-14 py-4">
       {/* Left fade */}
       <div
-        className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
+        className="absolute left-0 top-0 bottom-0 w-40 z-10 pointer-events-none"
         style={{
           background:
             "linear-gradient(to right, rgba(239,244,249,1) 0%, rgba(239,244,249,0) 100%)",
@@ -60,7 +60,7 @@ export function LogoMarquee() {
       />
       {/* Right fade */}
       <div
-        className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
+        className="absolute right-0 top-0 bottom-0 w-40 z-10 pointer-events-none"
         style={{
           background:
             "linear-gradient(to left, rgba(239,244,249,1) 0%, rgba(239,244,249,0) 100%)",
