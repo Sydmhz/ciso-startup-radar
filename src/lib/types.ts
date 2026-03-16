@@ -56,7 +56,10 @@ export interface CisoDirectoryEntry {
   id: string;
   name: string;
   company: string | null;
-  industry_vertical: string | null;
+  industry: string | null;
+  fortune100: boolean;
+  newCiso: boolean;
+  industry_vertical?: string | null;
   previous_role: string | null;
   linkedin_url: string | null;
   certifications: string[] | null;
