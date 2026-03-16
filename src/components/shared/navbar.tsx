@@ -26,36 +26,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0 group">
-            {/* Radar icon */}
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="shrink-0"
-            >
-              <circle cx="20" cy="32" r="4" fill="#3B82F6" />
-              <path
-                d="M12 28C12 22.477 16.477 18 22 18"
-                stroke="#3B82F6"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-              />
-              <path
-                d="M6 24C6 15.163 13.163 8 22 8"
-                stroke="#3B82F6"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-              />
-              <path
-                d="M0 20C0 8.954 8.954 0 20 0"
-                stroke="#3B82F6"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-              />
-            </svg>
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
             {/* Text mark */}
             <div className="flex flex-col leading-none">
               <span className="text-[22px] font-bold tracking-tight text-blue-400">
@@ -65,6 +36,29 @@ export function Navbar() {
                 StartUp Radar
               </span>
             </div>
+            {/* Radar icon — after text */}
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 36 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="shrink-0"
+            >
+              <circle cx="8" cy="28" r="3.5" fill="#3B82F6" />
+              <path
+                d="M14 24C14 20.134 17.134 17 21 17"
+                stroke="#3B82F6"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <path
+                d="M14 16C14 10.477 18.477 6 24 6"
+                stroke="#3B82F6"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+            </svg>
           </Link>
 
           {/* Desktop Nav */}
