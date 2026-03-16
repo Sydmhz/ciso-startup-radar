@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ArrowUpRight, ShieldAlert, Lightbulb, Layers } from "lucide-react";
@@ -75,8 +76,21 @@ export default function HomePage() {
       />
 
       {/* Hero Section */}
-      <section className="py-20 md:py-28" style={{ background: 'linear-gradient(180deg, #F8FAFC 0%, #EFF4F9 40%, #FFFFFF 100%)' }}>
+      <section className="py-16 md:py-24" style={{ background: 'linear-gradient(180deg, #F8FAFC 0%, #EFF4F9 40%, #FFFFFF 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Hero Logo */}
+          <div className="flex justify-center mb-8 md:mb-10">
+            <Image
+              src="/logo-hero.png"
+              alt="CISO StartUp Radar"
+              width={676}
+              height={486}
+              className="h-[120px] md:h-[160px] lg:h-[200px] w-auto object-contain"
+              priority
+              unoptimized
+            />
+          </div>
+
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-navy leading-tight max-w-4xl mx-auto">
             The Intelligence Layer for CISOs Navigating the Cybersecurity
             Startup Ecosystem

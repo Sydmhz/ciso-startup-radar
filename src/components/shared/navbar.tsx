@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -42,16 +41,11 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Center Logo */}
+          {/* Center Wordmark */}
           <Link href="/" className="flex items-center shrink-0">
-            <Image
-              src="/logo-nav.png"
-              alt="CISO StartUp Radar"
-              width={676}
-              height={486}
-              className="h-[56px] w-auto object-contain"
-              priority
-            />
+            <span className="text-[15px] font-bold tracking-tight text-white">
+              CISO<span className="text-white/50"> | </span><span className="font-medium text-white/80">StartUp Radar</span>
+            </span>
           </Link>
 
           {/* Right nav links */}
