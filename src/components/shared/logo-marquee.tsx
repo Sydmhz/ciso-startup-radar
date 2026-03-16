@@ -37,7 +37,7 @@ function LogoItem({ name, domain }: { name: string; domain: string }) {
         width={28}
         height={28}
         className="h-7 w-7 object-contain"
-        style={{ filter: "grayscale(100%) brightness(0)" }}
+        style={{ filter: "grayscale(100%) contrast(1.1)" }}
         unoptimized
       />
       <span className="text-black font-bold text-sm tracking-tight whitespace-nowrap">
