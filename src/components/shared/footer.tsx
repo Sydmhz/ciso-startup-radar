@@ -19,9 +19,9 @@ export function Footer() {
               <Image
                 src="/logo-nav.png"
                 alt="CISO StartUp Radar"
-                width={240}
-                height={174}
-                className="h-10 w-auto object-contain"
+                width={649}
+                height={472}
+                className="h-12 w-auto object-contain"
               />
             </Link>
             <p className="text-[13px] text-white/40 max-w-xs leading-relaxed">
