@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ArrowUpRight, ShieldAlert, Lightbulb, Layers } from "lucide-react";
+import { LogoMarquee } from "@/components/shared/logo-marquee";
 
 export const metadata: Metadata = {
   title: "CISOStartupRadar - The Intelligence Layer for CISOs",
@@ -92,6 +93,9 @@ export default function HomePage() {
               <Link href="/apply">Apply for CISO Access</Link>
             </Button>
           </div>
+
+          {/* Rolling logo strip — top startups */}
+          <LogoMarquee />
         </div>
       </section>
 
