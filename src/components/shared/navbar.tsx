@@ -5,13 +5,16 @@ import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const navLinks = [
+const navLinksLeft = [
   { href: "/directory", label: "Startup Directory" },
   { href: "/cisos", label: "CISO Directory" },
-  { href: "/training", label: "CISO Trainings" },
-  { href: "/venture-network", label: "Venture Network" },
-  { href: "/pricing", label: "Pricing" },
 ];
+
+const navLinksRight = [
+  { href: "/venture-network", label: "Venture Network" },
+];
+
+const allNavLinks = [...navLinksLeft, ...navLinksRight];
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -26,7 +29,20 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">
-          {/* Logo */}
+          {/* Left nav links */}
+          <div className="hidden md:flex items-center gap-1 flex-1">
+            {navLinksLeft.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 text-sm font-medium text-white/60 hover:text-white transition-colors rounded"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Center Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
               src="/logo-nav.png"
@@ -38,9 +54,9 @@ export function Navbar() {
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+          {/* Right nav links */}
+          <div className="hidden md:flex items-center gap-1 flex-1 justify-end">
+            {navLinksRight.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -69,7 +85,7 @@ export function Navbar() {
         {mobileOpen && (
           <div className="md:hidden pb-4 border-t border-white/10">
             <div className="flex flex-col pt-3">
-              {navLinks.map((link) => (
+              {allNavLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}

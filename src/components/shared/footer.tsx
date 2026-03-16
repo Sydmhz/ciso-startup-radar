@@ -12,7 +12,7 @@ export function Footer() {
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div className="flex flex-col md:flex-row items-start md:items-start justify-between gap-8">
           {/* Brand */}
           <div className="flex flex-col gap-3">
             <Link href="/" className="inline-block">
@@ -30,8 +30,58 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Right side: Legal + Contact */}
-          <div className="flex gap-16">
+          {/* Footer columns */}
+          <div className="flex gap-12 md:gap-16 flex-wrap">
+            {/* Pricing */}
+            <div>
+              <h3 className="text-[13px] font-semibold text-white/80 mb-3 tracking-wide uppercase">
+                Pricing
+              </h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="/pricing/founders"
+                    className="text-[13px] text-white/50 hover:text-white transition-colors"
+                  >
+                    Founders Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/pricing/enterprise"
+                    className="text-[13px] text-white/50 hover:text-white transition-colors"
+                  >
+                    Enterprise Pricing
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h3 className="text-[13px] font-semibold text-white/80 mb-3 tracking-wide uppercase">
+                Resources
+              </h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="/training"
+                    className="text-[13px] text-white/50 hover:text-white transition-colors"
+                  >
+                    CISO Trainings
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/venture-network"
+                    className="text-[13px] text-white/50 hover:text-white transition-colors"
+                  >
+                    Venture Network
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
             {/* Legal */}
             <div>
               <h3 className="text-[13px] font-semibold text-white/80 mb-3 tracking-wide uppercase">
