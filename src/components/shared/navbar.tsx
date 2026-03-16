@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -26,39 +27,15 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            {/* Text mark */}
-            <div className="flex flex-col leading-none">
-              <span className="text-[22px] font-bold tracking-tight text-blue-400">
-                CISO
-              </span>
-              <span className="text-[13px] font-medium tracking-wide text-white/80">
-                StartUp Radar
-              </span>
-            </div>
-            {/* Radar icon — after text */}
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 36 36"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="shrink-0"
-            >
-              <circle cx="8" cy="28" r="3.5" fill="#3B82F6" />
-              <path
-                d="M14 24C14 20.134 17.134 17 21 17"
-                stroke="#3B82F6"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-              <path
-                d="M14 16C14 10.477 18.477 6 24 6"
-                stroke="#3B82F6"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-            </svg>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/logo-nav.png"
+              alt="CISO StartUp Radar"
+              width={676}
+              height={486}
+              className="h-[56px] w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
